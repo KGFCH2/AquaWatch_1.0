@@ -179,7 +179,7 @@ export const Footer: React.FC = () => {
               </a>
             </div>
             <div className="text-sm text-gray-400">
-              <p>Data updated every 6 hours | Last update: 2 hours ago</p>
+              <p>Last update: 30 minutes ago</p>
             </div>
           </div>
         </div>
