@@ -1,38 +1,38 @@
-# AquaWatch 🌊
+# AquaWatch
 
 **Real-time Water Crisis Monitoring System for India**
 
 AquaWatch is a comprehensive web application that provides real-time monitoring and analysis of India's water crisis situation across all states and union territories. The platform offers critical insights into groundwater depletion, water availability, and population impact through an intuitive dashboard interface.
 
-## 🌟 Features
+## Features
 
-### 📊 **Dashboard Overview**
+### Dashboard Overview
 
 - **National Crisis Statistics**: Real-time monitoring of states in crisis, water availability levels, affected population, and groundwater depletion rates
 - **State-wise Analysis**: Detailed breakdown of water conditions across all Indian states
 - **Interactive State Grid**: Visual representation of water crisis severity with color-coded indicators
 - **Trend Analysis**: Historical data tracking with up/down/stable trend indicators
 
-### 🚨 **Emergency Response**
+### Emergency Response
 
 - **Crisis Alerts Panel**: Real-time alerts and notifications for water emergencies
 - **Emergency Response Modal**: Quick access to emergency protocols and response procedures
 - **Emergency Contacts**: State-wise emergency contact information for water crisis situations
 
-### 💡 **Solutions & Resources**
+### Solutions and Resources
 
 - **Water Management Solutions**: Comprehensive list of water conservation and management strategies
 - **Data Methodology**: Transparent information about data sources and analysis methods
 - **Government Resources**: Links to official water management policies and initiatives
 
-### 📱 **User Experience**
+### User Experience
 
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Loading Animations**: Smooth user experience with elegant loading screens
 - **Accessible Interface**: ARIA-compliant design for screen readers and accessibility tools
 - **Mobile-First Navigation**: Collapsible menu system for mobile users
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 AquaWatch_1.0/
@@ -67,9 +67,9 @@ AquaWatch_1.0/
     └── .gitignore            # Git ignore for sensitive files
 ```
 
-## 🛠️ Technology Stack
+## Technology Stack
 
-### **Frontend**
+### Frontend
 
 - **React 18.3.1** - Modern React with functional components and hooks
 - **TypeScript 5.5.3** - Type-safe JavaScript development
@@ -78,20 +78,20 @@ AquaWatch_1.0/
 - **Lucide React 0.344.0** - Beautiful, customizable icons
 - **Firebase 12.2.1** - Real-time database and hosting
 
-### **Backend**
+### Backend
 
 - **Python** - Data processing and analysis
 - **Pandas** - Data manipulation and analysis
 - **Firebase Admin SDK** - Server-side Firebase integration
 
-### **Development Tools**
+### Development Tools
 
 - **ESLint** - Code linting and quality assurance
 - **TypeScript ESLint** - TypeScript-specific linting rules
 - **PostCSS** - CSS post-processing
 - **Autoprefixer** - Automatic vendor prefixing
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -163,7 +163,7 @@ AquaWatch_1.0/
    python upload_to_firebase.py
    ```
 
-## 📊 Data Sources
+## Data Sources
 
 AquaWatch aggregates data from multiple reliable sources:
 
@@ -175,7 +175,7 @@ AquaWatch aggregates data from multiple reliable sources:
 
 _Data is updated every 6 hours to ensure accuracy and timeliness._
 
-## 🎯 Key Metrics Tracked
+## Key Metrics Tracked
 
 - **Water Availability**: Current reservoir and groundwater levels
 - **Crisis Severity**: State-wise crisis classification (Critical/High/Moderate/Low)
@@ -183,7 +183,7 @@ _Data is updated every 6 hours to ensure accuracy and timeliness._
 - **Groundwater Depletion**: Annual decline rates across regions
 - **Trend Analysis**: Month-over-month and year-over-year comparisons
 
-## 🔧 Configuration
+## Configuration
 
 ### Firebase Setup (Optional)
 
@@ -205,7 +205,7 @@ VITE_FIREBASE_PROJECT_ID=your_project_id
 # ... other Firebase config
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to AquaWatch! Please follow these steps:
 
@@ -223,11 +223,11 @@ We welcome contributions to AquaWatch! Please follow these steps:
 - Add proper ARIA labels for accessibility
 - Write meaningful commit messages
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## Support
 
 If you encounter any issues or have questions:
 
@@ -235,18 +235,18 @@ If you encounter any issues or have questions:
 2. Create a new issue if your problem isn't already reported
 3. Provide detailed information about your environment and the issue
 
-## 🌍 Impact
+## Impact
 
 AquaWatch aims to:
 
-- **Raise Awareness** about India's water crisis
-- **Enable Quick Response** to water emergencies
-- **Support Decision Making** with real-time data
-- **Promote Conservation** through education and solutions
-- **Connect Communities** with resources and support
+- Raise awareness about India's water crisis
+- Enable quick response to water emergencies
+- Support decision making with real-time data
+- Promote conservation through education and solutions
+- Connect communities with resources and support
 
 ---
 
-**Built with ❤️ for India's water security**
+**Built for India's water security**
 
-_Last updated: September 2025_
+Last updated: September 2025
