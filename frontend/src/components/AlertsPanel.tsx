@@ -183,7 +183,10 @@ export const AlertsPanel: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            <Bell className="h-8 w-8 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+            <Bell
+              className="h-8 w-8 text-blue-600 dark:text-blue-400"
+              aria-hidden="true"
+            />
             <div>
               <h2
                 id="alerts-title"
@@ -217,7 +220,9 @@ export const AlertsPanel: React.FC = () => {
                 className="h-5 w-5 text-red-600 dark:text-red-400"
                 aria-hidden="true"
               />
-              <span className="text-red-800 dark:text-red-200 font-semibold">Critical</span>
+              <span className="text-red-800 dark:text-red-200 font-semibold">
+                Critical
+              </span>
             </div>
             <p className="text-2xl font-bold text-red-900 dark:text-red-100 mt-2">
               {alerts.filter((a) => a.type === "critical").length}
@@ -230,7 +235,9 @@ export const AlertsPanel: React.FC = () => {
                 className="h-5 w-5 text-orange-600 dark:text-orange-400"
                 aria-hidden="true"
               />
-              <span className="text-orange-800 dark:text-orange-200 font-semibold">Warning</span>
+              <span className="text-orange-800 dark:text-orange-200 font-semibold">
+                Warning
+              </span>
             </div>
             <p className="text-2xl font-bold text-orange-900 dark:text-orange-100 mt-2">
               {alerts.filter((a) => a.type === "warning").length}
@@ -239,8 +246,13 @@ export const AlertsPanel: React.FC = () => {
 
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
             <div className="flex items-center space-x-2">
-              <Info className="h-5 w-5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-              <span className="text-blue-800 dark:text-blue-200 font-semibold">Info</span>
+              <Info
+                className="h-5 w-5 text-blue-600 dark:text-blue-400"
+                aria-hidden="true"
+              />
+              <span className="text-blue-800 dark:text-blue-200 font-semibold">
+                Info
+              </span>
             </div>
             <p className="text-2xl font-bold text-blue-900 dark:text-blue-100 mt-2">
               {alerts.filter((a) => a.type === "info").length}
@@ -253,7 +265,9 @@ export const AlertsPanel: React.FC = () => {
                 className="h-5 w-5 text-green-600 dark:text-green-400"
                 aria-hidden="true"
               />
-              <span className="text-green-800 dark:text-green-200 font-semibold">Success</span>
+              <span className="text-green-800 dark:text-green-200 font-semibold">
+                Success
+              </span>
             </div>
             <p className="text-2xl font-bold text-green-900 dark:text-green-100 mt-2">
               {alerts.filter((a) => a.type === "success").length}
@@ -300,7 +314,9 @@ export const AlertsPanel: React.FC = () => {
               key={alert.id}
               className={`border rounded-xl p-6 transition-all duration-200 hover:shadow-md ${getAlertColor(
                 alert.type
-              )} ${!alert.isRead ? "ring-2 ring-blue-200 dark:ring-blue-700" : ""}`}
+              )} ${
+                !alert.isRead ? "ring-2 ring-blue-200 dark:ring-blue-700" : ""
+              }`}
               role="article"
               aria-labelledby={`alert-${alert.id}-title`}
             >
@@ -367,7 +383,10 @@ export const AlertsPanel: React.FC = () => {
       {/* Emergency Contact */}
       <div className="mt-12 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">
         <div className="flex items-center space-x-3 mb-4">
-          <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400" aria-hidden="true" />
+          <AlertTriangle
+            className="h-6 w-6 text-red-600 dark:text-red-400"
+            aria-hidden="true"
+          />
           <h3 className="text-xl font-semibold text-red-800 dark:text-red-200">
             Emergency Response
           </h3>
@@ -378,12 +397,20 @@ export const AlertsPanel: React.FC = () => {
         </p>
         <div className="flex items-center space-x-6">
           <div>
-            <p className="text-red-600 dark:text-red-300 font-medium">Crisis Helpline</p>
-            <p className="text-2xl font-bold text-red-800 dark:text-red-200">1800-WATER-HELP</p>
+            <p className="text-red-600 dark:text-red-300 font-medium">
+              Crisis Helpline
+            </p>
+            <p className="text-2xl font-bold text-red-800 dark:text-red-200">
+              1800-WATER-HELP
+            </p>
           </div>
           <div>
-            <p className="text-red-600 dark:text-red-300 font-medium">WhatsApp Support</p>
-            <p className="text-lg font-semibold text-red-800 dark:text-red-200">+91 9876543210</p>
+            <p className="text-red-600 dark:text-red-300 font-medium">
+              WhatsApp Support
+            </p>
+            <p className="text-lg font-semibold text-red-800 dark:text-red-200">
+              +91 9876543210
+            </p>
           </div>
         </div>
       </div>

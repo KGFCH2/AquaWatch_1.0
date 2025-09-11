@@ -15,25 +15,22 @@ export const ThemeToggle: React.FC = () => {
         onChange={toggleTheme}
         aria-label="Toggle between light and dark mode"
       />
-      
+
       {/* Toggle Background with sliding circle */}
       <div
         className={`
           relative w-[80px] h-[40px] rounded-full shadow-sm duration-300 transition-all overflow-hidden
-          ${isDark 
-            ? "bg-slate-800" 
-            : "bg-sky-200"
-          }
-          after:absolute after:content-[''] after:w-[32px] after:h-[32px] 
+          ${isDark ? "bg-slate-800" : "bg-sky-200"}
+          after:absolute after:content-[''] after:w-[32px] after:h-[32px]
           after:rounded-full after:top-[4px] after:shadow-md after:duration-300 after:transition-all after:z-10
-          ${isDark
-            ? "after:left-[4px] after:bg-gradient-to-r after:from-slate-600 after:to-slate-700"
-            : "after:left-[44px] after:bg-gradient-to-r after:from-orange-400 after:to-yellow-400"
+          ${
+            isDark
+              ? "after:left-[4px] after:bg-gradient-to-r after:from-slate-600 after:to-slate-700"
+              : "after:left-[44px] after:bg-gradient-to-r after:from-orange-400 after:to-yellow-400"
           }
           hover:after:scale-105 active:after:scale-95
         `}
-      >
-      </div>
+      ></div>
 
       {/* Sun Icon - Should be active when light mode (right side) */}
       <svg
@@ -43,9 +40,10 @@ export const ThemeToggle: React.FC = () => {
         xmlns="http://www.w3.org/2000/svg"
         className={`
           absolute w-4 h-4 right-[12px] top-1/2 transform -translate-y-1/2 transition-all duration-300 z-20 pointer-events-none
-          ${isDark 
-            ? "fill-slate-400 opacity-40" 
-            : "fill-white opacity-100 drop-shadow-sm"
+          ${
+            isDark
+              ? "fill-slate-400 opacity-40"
+              : "fill-white opacity-100 drop-shadow-sm"
           }
         `}
       >
@@ -60,9 +58,10 @@ export const ThemeToggle: React.FC = () => {
         xmlns="http://www.w3.org/2000/svg"
         className={`
           absolute w-4 h-4 left-[12px] top-1/2 transform -translate-y-1/2 transition-all duration-300 z-20 pointer-events-none
-          ${isDark 
-            ? "fill-white opacity-100 drop-shadow-sm" 
-            : "fill-slate-500 opacity-40"
+          ${
+            isDark
+              ? "fill-white opacity-100 drop-shadow-sm"
+              : "fill-slate-500 opacity-40"
           }
         `}
       >

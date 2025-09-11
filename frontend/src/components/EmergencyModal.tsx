@@ -1,132 +1,250 @@
-import React from 'react';
-import { X, Phone, Mail, MapPin, AlertTriangle, Users, Droplets, Truck } from 'lucide-react';
+import React from "react";
+import {
+  X,
+  Phone,
+  Mail,
+  MapPin,
+  AlertTriangle,
+  Users,
+  Droplets,
+  Truck,
+} from "lucide-react";
 
 interface EmergencyModalProps {
-  type: 'response' | 'contacts';
+  type: "response" | "contacts";
   state: string;
   onClose: () => void;
 }
 
 const emergencyContacts = {
-  'Tamil Nadu': {
-    state: 'Tamil Nadu',
+  "Tamil Nadu": {
+    state: "Tamil Nadu",
     contacts: [
-      { type: 'Water Board', phone: '044-2450-0000', email: 'tnwb@tn.gov.in' },
-      { type: 'Disaster Management', phone: '044-2341-0400', email: 'disaster@tn.gov.in' },
-      { type: 'Municipal Corporation', phone: '044-2560-3000', email: 'chennai@tn.gov.in' }
-    ]
+      { type: "Water Board", phone: "044-2450-0000", email: "tnwb@tn.gov.in" },
+      {
+        type: "Disaster Management",
+        phone: "044-2341-0400",
+        email: "disaster@tn.gov.in",
+      },
+      {
+        type: "Municipal Corporation",
+        phone: "044-2560-3000",
+        email: "chennai@tn.gov.in",
+      },
+    ],
   },
-  'Karnataka': {
-    state: 'Karnataka',
+  Karnataka: {
+    state: "Karnataka",
     contacts: [
-      { type: 'Water Resources', phone: '080-2235-2828', email: 'water@karnataka.gov.in' },
-      { type: 'BWSSB', phone: '080-2294-2294', email: 'bwssb@karnataka.gov.in' },
-      { type: 'Emergency Services', phone: '080-2222-0000', email: 'emergency@karnataka.gov.in' }
-    ]
+      {
+        type: "Water Resources",
+        phone: "080-2235-2828",
+        email: "water@karnataka.gov.in",
+      },
+      {
+        type: "BWSSB",
+        phone: "080-2294-2294",
+        email: "bwssb@karnataka.gov.in",
+      },
+      {
+        type: "Emergency Services",
+        phone: "080-2222-0000",
+        email: "emergency@karnataka.gov.in",
+      },
+    ],
   },
-  'Maharashtra': {
-    state: 'Maharashtra',
+  Maharashtra: {
+    state: "Maharashtra",
     contacts: [
-      { type: 'Water Supply', phone: '022-2202-6666', email: 'water@maharashtra.gov.in' },
-      { type: 'BMC Water Dept', phone: '022-2266-8888', email: 'bmc@mumbai.gov.in' },
-      { type: 'Drought Cell', phone: '022-2202-5555', email: 'drought@maharashtra.gov.in' }
-    ]
+      {
+        type: "Water Supply",
+        phone: "022-2202-6666",
+        email: "water@maharashtra.gov.in",
+      },
+      {
+        type: "BMC Water Dept",
+        phone: "022-2266-8888",
+        email: "bmc@mumbai.gov.in",
+      },
+      {
+        type: "Drought Cell",
+        phone: "022-2202-5555",
+        email: "drought@maharashtra.gov.in",
+      },
+    ],
   },
-  'Delhi': {
-    state: 'Delhi',
+  Delhi: {
+    state: "Delhi",
     contacts: [
-      { type: 'Delhi Jal Board', phone: '011-2436-7000', email: 'djb@delhi.gov.in' },
-      { type: 'Water Crisis Cell', phone: '011-2336-3000', email: 'crisis@delhi.gov.in' },
-      { type: 'Emergency Services', phone: '011-1916', email: 'emergency@delhi.gov.in' }
-    ]
+      {
+        type: "Delhi Jal Board",
+        phone: "011-2436-7000",
+        email: "djb@delhi.gov.in",
+      },
+      {
+        type: "Water Crisis Cell",
+        phone: "011-2336-3000",
+        email: "crisis@delhi.gov.in",
+      },
+      {
+        type: "Emergency Services",
+        phone: "011-1916",
+        email: "emergency@delhi.gov.in",
+      },
+    ],
   },
-  'Gujarat': {
-    state: 'Gujarat',
+  Gujarat: {
+    state: "Gujarat",
     contacts: [
-      { type: 'Gujarat Water Board', phone: '079-2325-4000', email: 'gwb@gujarat.gov.in' },
-      { type: 'Disaster Management', phone: '079-2324-9000', email: 'disaster@gujarat.gov.in' },
-      { type: 'Water Supply Dept', phone: '079-2325-6000', email: 'water@gujarat.gov.in' }
-    ]
+      {
+        type: "Gujarat Water Board",
+        phone: "079-2325-4000",
+        email: "gwb@gujarat.gov.in",
+      },
+      {
+        type: "Disaster Management",
+        phone: "079-2324-9000",
+        email: "disaster@gujarat.gov.in",
+      },
+      {
+        type: "Water Supply Dept",
+        phone: "079-2325-6000",
+        email: "water@gujarat.gov.in",
+      },
+    ],
   },
-  'Rajasthan': {
-    state: 'Rajasthan',
+  Rajasthan: {
+    state: "Rajasthan",
     contacts: [
-      { type: 'Rajasthan Water Board', phone: '0141-222-1000', email: 'rwb@rajasthan.gov.in' },
-      { type: 'Drought Relief', phone: '0141-222-2000', email: 'drought@rajasthan.gov.in' },
-      { type: 'Emergency Water Supply', phone: '0141-222-3000', email: 'emergency@rajasthan.gov.in' }
-    ]
+      {
+        type: "Rajasthan Water Board",
+        phone: "0141-222-1000",
+        email: "rwb@rajasthan.gov.in",
+      },
+      {
+        type: "Drought Relief",
+        phone: "0141-222-2000",
+        email: "drought@rajasthan.gov.in",
+      },
+      {
+        type: "Emergency Water Supply",
+        phone: "0141-222-3000",
+        email: "emergency@rajasthan.gov.in",
+      },
+    ],
   },
-  'Punjab': {
-    state: 'Punjab',
+  Punjab: {
+    state: "Punjab",
     contacts: [
-      { type: 'Punjab Water Board', phone: '0172-221-4000', email: 'pwb@punjab.gov.in' },
-      { type: 'Agricultural Water', phone: '0172-221-5000', email: 'agri@punjab.gov.in' },
-      { type: 'Crisis Management', phone: '0172-221-6000', email: 'crisis@punjab.gov.in' }
-    ]
+      {
+        type: "Punjab Water Board",
+        phone: "0172-221-4000",
+        email: "pwb@punjab.gov.in",
+      },
+      {
+        type: "Agricultural Water",
+        phone: "0172-221-5000",
+        email: "agri@punjab.gov.in",
+      },
+      {
+        type: "Crisis Management",
+        phone: "0172-221-6000",
+        email: "crisis@punjab.gov.in",
+      },
+    ],
   },
-  'Uttar Pradesh': {
-    state: 'Uttar Pradesh',
+  "Uttar Pradesh": {
+    state: "Uttar Pradesh",
     contacts: [
-      { type: 'UP Jal Nigam', phone: '0522-228-4000', email: 'upjn@up.gov.in' },
-      { type: 'Water Resources', phone: '0522-228-5000', email: 'water@up.gov.in' },
-      { type: 'Emergency Response', phone: '0522-228-6000', email: 'emergency@up.gov.in' }
-    ]
+      { type: "UP Jal Nigam", phone: "0522-228-4000", email: "upjn@up.gov.in" },
+      {
+        type: "Water Resources",
+        phone: "0522-228-5000",
+        email: "water@up.gov.in",
+      },
+      {
+        type: "Emergency Response",
+        phone: "0522-228-6000",
+        email: "emergency@up.gov.in",
+      },
+    ],
   },
-  'West Bengal': {
-    state: 'West Bengal',
+  "West Bengal": {
+    state: "West Bengal",
     contacts: [
-      { type: 'WB Water Board', phone: '033-2214-5000', email: 'wbwb@wb.gov.in' },
-      { type: 'Disaster Management', phone: '033-2214-6000', email: 'disaster@wb.gov.in' },
-      { type: 'Kolkata Water', phone: '033-2214-7000', email: 'kwb@wb.gov.in' }
-    ]
-  }
+      {
+        type: "WB Water Board",
+        phone: "033-2214-5000",
+        email: "wbwb@wb.gov.in",
+      },
+      {
+        type: "Disaster Management",
+        phone: "033-2214-6000",
+        email: "disaster@wb.gov.in",
+      },
+      { type: "Kolkata Water", phone: "033-2214-7000", email: "kwb@wb.gov.in" },
+    ],
+  },
 };
 
 const emergencyResponsePlan = {
   immediate: [
-    'Activate emergency water supply tankers',
-    'Open community water distribution centers',
-    'Issue water conservation advisories',
-    'Deploy mobile water purification units',
-    'Coordinate with NGOs for relief operations'
+    "Activate emergency water supply tankers",
+    "Open community water distribution centers",
+    "Issue water conservation advisories",
+    "Deploy mobile water purification units",
+    "Coordinate with NGOs for relief operations",
   ],
   shortTerm: [
-    'Implement water rationing schedules',
-    'Accelerate groundwater recharge projects',
-    'Establish temporary desalination units',
-    'Increase inter-state water transfers',
-    'Launch public awareness campaigns'
+    "Implement water rationing schedules",
+    "Accelerate groundwater recharge projects",
+    "Establish temporary desalination units",
+    "Increase inter-state water transfers",
+    "Launch public awareness campaigns",
   ],
   longTerm: [
-    'Develop drought-resistant infrastructure',
-    'Implement comprehensive water management policies',
-    'Invest in renewable energy-powered desalination',
-    'Create strategic water reserves',
-    'Establish early warning systems'
-  ]
+    "Develop drought-resistant infrastructure",
+    "Implement comprehensive water management policies",
+    "Invest in renewable energy-powered desalination",
+    "Create strategic water reserves",
+    "Establish early warning systems",
+  ],
 };
 
-export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onClose }) => {
-  const stateContacts = emergencyContacts[state as keyof typeof emergencyContacts];
+export const EmergencyModal: React.FC<EmergencyModalProps> = ({
+  type,
+  state,
+  onClose,
+}) => {
+  const stateContacts =
+    emergencyContacts[state as keyof typeof emergencyContacts];
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
       onClick={onClose}
       role="dialog"
       aria-labelledby="emergency-modal-title"
       aria-modal="true"
     >
-      <div 
+      <div
         className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" aria-hidden="true" />
-              <h2 id="emergency-modal-title" className="text-2xl font-bold text-gray-900 dark:text-white">
-                {type === 'response' ? 'Emergency Response Plan' : `Emergency Contacts - ${state}`}
+              <AlertTriangle
+                className="h-8 w-8 text-red-600 dark:text-red-400"
+                aria-hidden="true"
+              />
+              <h2
+                id="emergency-modal-title"
+                className="text-2xl font-bold text-gray-900 dark:text-white"
+              >
+                {type === "response"
+                  ? "Emergency Response Plan"
+                  : `Emergency Contacts - ${state}`}
               </h2>
             </div>
             <button
@@ -138,13 +256,18 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
             </button>
           </div>
 
-          {type === 'response' ? (
+          {type === "response" ? (
             <div className="space-y-8">
               {/* Immediate Response */}
               <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-red-800 dark:text-red-200">Immediate Response (0-24 hours)</h3>
+                  <AlertTriangle
+                    className="h-6 w-6 text-red-600 dark:text-red-400"
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-xl font-semibold text-red-800 dark:text-red-200">
+                    Immediate Response (0-24 hours)
+                  </h3>
                 </div>
                 <ul className="space-y-3">
                   {emergencyResponsePlan.immediate.map((action, index) => (
@@ -152,7 +275,9 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                       <div className="w-6 h-6 bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-300 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="text-red-700 dark:text-red-300">{action}</span>
+                      <span className="text-red-700 dark:text-red-300">
+                        {action}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -161,8 +286,13 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
               {/* Short-term Response */}
               <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <Truck className="h-6 w-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-orange-800 dark:text-orange-200">Short-term Response (1-4 weeks)</h3>
+                  <Truck
+                    className="h-6 w-6 text-orange-600 dark:text-orange-400"
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-xl font-semibold text-orange-800 dark:text-orange-200">
+                    Short-term Response (1-4 weeks)
+                  </h3>
                 </div>
                 <ul className="space-y-3">
                   {emergencyResponsePlan.shortTerm.map((action, index) => (
@@ -170,7 +300,9 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                       <div className="w-6 h-6 bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-300 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="text-orange-700 dark:text-orange-300">{action}</span>
+                      <span className="text-orange-700 dark:text-orange-300">
+                        {action}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -179,8 +311,13 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
               {/* Long-term Response */}
               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <Droplets className="h-6 w-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-200">Long-term Recovery (1+ months)</h3>
+                  <Droplets
+                    className="h-6 w-6 text-blue-600 dark:text-blue-400"
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-200">
+                    Long-term Recovery (1+ months)
+                  </h3>
                 </div>
                 <ul className="space-y-3">
                   {emergencyResponsePlan.longTerm.map((action, index) => (
@@ -188,7 +325,9 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                       <div className="w-6 h-6 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="text-blue-700 dark:text-blue-300">{action}</span>
+                      <span className="text-blue-700 dark:text-blue-300">
+                        {action}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -196,20 +335,36 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
 
               {/* National Helpline */}
               <div className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-slate-200 mb-4">24/7 National Crisis Helpline</h3>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-slate-200 mb-4">
+                  24/7 National Crisis Helpline
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-center space-x-3">
-                    <Phone className="h-6 w-6 text-green-600 dark:text-green-400" aria-hidden="true" />
+                    <Phone
+                      className="h-6 w-6 text-green-600 dark:text-green-400"
+                      aria-hidden="true"
+                    />
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-slate-100">Emergency Hotline</p>
-                      <p className="text-2xl font-bold text-green-600 dark:text-green-400">1800-WATER-911</p>
+                      <p className="font-semibold text-gray-900 dark:text-slate-100">
+                        Emergency Hotline
+                      </p>
+                      <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+                        1800-WATER-911
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                    <Mail
+                      className="h-6 w-6 text-blue-600 dark:text-blue-400"
+                      aria-hidden="true"
+                    />
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-slate-100">Crisis Email</p>
-                      <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">crisis@aquawatch.gov.in</p>
+                      <p className="font-semibold text-gray-900 dark:text-slate-100">
+                        Crisis Email
+                      </p>
+                      <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                        crisis@aquawatch.gov.in
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -225,12 +380,20 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {stateContacts.contacts.map((contact, index) => (
-                        <div key={index} className="bg-white dark:bg-slate-700 rounded-lg p-4 border border-blue-100 dark:border-slate-600">
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{contact.type}</h4>
+                        <div
+                          key={index}
+                          className="bg-white dark:bg-slate-700 rounded-lg p-4 border border-blue-100 dark:border-slate-600"
+                        >
+                          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                            {contact.type}
+                          </h4>
                           <div className="space-y-2">
                             <div className="flex items-center space-x-2">
-                              <Phone className="h-4 w-4 text-green-600 dark:text-green-400" aria-hidden="true" />
-                              <a 
+                              <Phone
+                                className="h-4 w-4 text-green-600 dark:text-green-400"
+                                aria-hidden="true"
+                              />
+                              <a
                                 href={`tel:${contact.phone}`}
                                 className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 font-medium focus:outline-none focus:underline"
                               >
@@ -238,8 +401,11 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                               </a>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Mail className="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                              <a 
+                              <Mail
+                                className="h-4 w-4 text-blue-600 dark:text-blue-400"
+                                aria-hidden="true"
+                              />
+                              <a
                                 href={`mailto:${contact.email}`}
                                 className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm focus:outline-none focus:underline"
                               >
@@ -253,20 +419,36 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                   </div>
 
                   <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
-                    <h3 className="text-xl font-semibold text-red-800 dark:text-red-200 mb-4">Emergency Water Supply Locations</h3>
+                    <h3 className="text-xl font-semibold text-red-800 dark:text-red-200 mb-4">
+                      Emergency Water Supply Locations
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex items-start space-x-3">
-                        <MapPin className="h-5 w-5 text-red-600 dark:text-red-400 mt-1" aria-hidden="true" />
+                        <MapPin
+                          className="h-5 w-5 text-red-600 dark:text-red-400 mt-1"
+                          aria-hidden="true"
+                        />
                         <div>
-                          <p className="font-semibold text-red-800 dark:text-red-200">Central Distribution Center</p>
-                          <p className="text-red-700 dark:text-red-300 text-sm">Main City Center - 24/7 Operations</p>
+                          <p className="font-semibold text-red-800 dark:text-red-200">
+                            Central Distribution Center
+                          </p>
+                          <p className="text-red-700 dark:text-red-300 text-sm">
+                            Main City Center - 24/7 Operations
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
-                        <MapPin className="h-5 w-5 text-red-600 dark:text-red-400 mt-1" aria-hidden="true" />
+                        <MapPin
+                          className="h-5 w-5 text-red-600 dark:text-red-400 mt-1"
+                          aria-hidden="true"
+                        />
                         <div>
-                          <p className="font-semibold text-red-800 dark:text-red-200">Mobile Water Tankers</p>
-                          <p className="text-red-700 dark:text-red-300 text-sm">Call helpline for nearest location</p>
+                          <p className="font-semibold text-red-800 dark:text-red-200">
+                            Mobile Water Tankers
+                          </p>
+                          <p className="text-red-700 dark:text-red-300 text-sm">
+                            Call helpline for nearest location
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -274,19 +456,30 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                 </>
               ) : (
                 <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-                  <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" aria-hidden="true" />
+                  <Users
+                    className="h-12 w-12 text-gray-400 mx-auto mb-4"
+                    aria-hidden="true"
+                  />
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">
                     Emergency Contacts for {state}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Specific contact information for {state} is being updated. Please use the national helpline for immediate assistance.
+                    Specific contact information for {state} is being updated.
+                    Please use the national helpline for immediate assistance.
                   </p>
                   <div className="bg-white rounded-lg p-4 border border-gray-200">
                     <div className="flex items-center justify-center space-x-3">
-                      <Phone className="h-6 w-6 text-green-600" aria-hidden="true" />
+                      <Phone
+                        className="h-6 w-6 text-green-600"
+                        aria-hidden="true"
+                      />
                       <div>
-                        <p className="font-semibold text-gray-900">National Crisis Helpline</p>
-                        <p className="text-2xl font-bold text-green-600">1800-WATER-911</p>
+                        <p className="font-semibold text-gray-900">
+                          National Crisis Helpline
+                        </p>
+                        <p className="text-2xl font-bold text-green-600">
+                          1800-WATER-911
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -295,22 +488,45 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
 
               {/* National Emergency Contacts */}
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">National Emergency Services</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                  National Emergency Services
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center">
-                    <Phone className="h-8 w-8 text-green-600 mx-auto mb-2" aria-hidden="true" />
-                    <p className="font-semibold text-gray-900">Crisis Hotline</p>
-                    <p className="text-lg font-bold text-green-600">1800-WATER-911</p>
+                    <Phone
+                      className="h-8 w-8 text-green-600 mx-auto mb-2"
+                      aria-hidden="true"
+                    />
+                    <p className="font-semibold text-gray-900">
+                      Crisis Hotline
+                    </p>
+                    <p className="text-lg font-bold text-green-600">
+                      1800-WATER-911
+                    </p>
                   </div>
                   <div className="text-center">
-                    <Mail className="h-8 w-8 text-blue-600 mx-auto mb-2" aria-hidden="true" />
-                    <p className="font-semibold text-gray-900">Emergency Email</p>
-                    <p className="text-sm font-semibold text-blue-600">crisis@aquawatch.gov.in</p>
+                    <Mail
+                      className="h-8 w-8 text-blue-600 mx-auto mb-2"
+                      aria-hidden="true"
+                    />
+                    <p className="font-semibold text-gray-900">
+                      Emergency Email
+                    </p>
+                    <p className="text-sm font-semibold text-blue-600">
+                      crisis@aquawatch.gov.in
+                    </p>
                   </div>
                   <div className="text-center">
-                    <Users className="h-8 w-8 text-purple-600 mx-auto mb-2" aria-hidden="true" />
-                    <p className="font-semibold text-gray-900">WhatsApp Support</p>
-                    <p className="text-lg font-bold text-purple-600">+91 9876543210</p>
+                    <Users
+                      className="h-8 w-8 text-purple-600 mx-auto mb-2"
+                      aria-hidden="true"
+                    />
+                    <p className="font-semibold text-gray-900">
+                      WhatsApp Support
+                    </p>
+                    <p className="text-lg font-bold text-purple-600">
+                      +91 9876543210
+                    </p>
                   </div>
                 </div>
               </div>

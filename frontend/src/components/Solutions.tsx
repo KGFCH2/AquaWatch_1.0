@@ -166,7 +166,9 @@ const categories = [
 
 export const Solutions: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [expandedSolutions, setExpandedSolutions] = useState<Set<string>>(new Set());
+  const [expandedSolutions, setExpandedSolutions] = useState<Set<string>>(
+    new Set()
+  );
   const navigate = useNavigate();
 
   const filteredSolutions =
@@ -175,7 +177,7 @@ export const Solutions: React.FC = () => {
       : solutions.filter((solution) => solution.category === selectedCategory);
 
   const toggleSolutionExpansion = (solutionId: string) => {
-    setExpandedSolutions(prev => {
+    setExpandedSolutions((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(solutionId)) {
         newSet.delete(solutionId);
@@ -283,7 +285,9 @@ export const Solutions: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-600 dark:text-slate-300 mb-4">{solution.description}</p>
+                <p className="text-gray-600 dark:text-slate-300 mb-4">
+                  {solution.description}
+                </p>
 
                 <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
                   <div>
@@ -293,13 +297,17 @@ export const Solutions: React.FC = () => {
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500 dark:text-slate-400">Timeline</p>
+                    <p className="text-gray-500 dark:text-slate-400">
+                      Timeline
+                    </p>
                     <p className="font-semibold text-gray-900 dark:text-white">
                       {solution.timeline}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500 dark:text-slate-400">Cost Range</p>
+                    <p className="text-gray-500 dark:text-slate-400">
+                      Cost Range
+                    </p>
                     <p className="font-semibold text-gray-900 dark:text-white">
                       {solution.cost}
                     </p>
@@ -340,7 +348,9 @@ export const Solutions: React.FC = () => {
                             <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-medium">
                               {index + 1}
                             </span>
-                            <span className="text-gray-700 dark:text-slate-300">{step}</span>
+                            <span className="text-gray-700 dark:text-slate-300">
+                              {step}
+                            </span>
                           </li>
                         ))}
                       </ol>
@@ -357,7 +367,9 @@ export const Solutions: React.FC = () => {
                             className="flex items-start space-x-2"
                           >
                             <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-700 dark:text-slate-300">{example}</span>
+                            <span className="text-gray-700 dark:text-slate-300">
+                              {example}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -380,13 +392,17 @@ export const Solutions: React.FC = () => {
             <p className="text-red-700 dark:text-red-300 mb-2">
               <strong>National Water Crisis Helpline:</strong>
             </p>
-            <p className="text-2xl font-bold text-red-800 dark:text-red-200">1800-11-WATER</p>
+            <p className="text-2xl font-bold text-red-800 dark:text-red-200">
+              1800-11-WATER
+            </p>
           </div>
           <div>
             <p className="text-red-700 dark:text-red-300 mb-2">
               <strong>Emergency Services:</strong>
             </p>
-            <p className="text-lg font-semibold text-red-800 dark:text-red-200">Available 24/7</p>
+            <p className="text-lg font-semibold text-red-800 dark:text-red-200">
+              Available 24/7
+            </p>
           </div>
         </div>
       </div>

@@ -540,8 +540,13 @@ export const StateGrid: React.FC = () => {
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-gray-500 dark:text-slate-400" aria-hidden="true" />
-                <h3 className="font-semibold text-gray-900 dark:text-white">{state.name}</h3>
+                <MapPin
+                  className="h-5 w-5 text-gray-500 dark:text-slate-400"
+                  aria-hidden="true"
+                />
+                <h3 className="font-semibold text-gray-900 dark:text-white">
+                  {state.name}
+                </h3>
               </div>
               {getTrendIcon(state.trend)}
             </div>
@@ -561,8 +566,12 @@ export const StateGrid: React.FC = () => {
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600 dark:text-slate-300">Water Availability</span>
-                  <span className="font-medium text-gray-900 dark:text-white">{state.waterLevel}%</span>
+                  <span className="text-gray-600 dark:text-slate-300">
+                    Water Availability
+                  </span>
+                  <span className="font-medium text-gray-900 dark:text-white">
+                    {state.waterLevel}%
+                  </span>
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-2">
                   <div
@@ -663,7 +672,9 @@ export const StateGrid: React.FC = () => {
                     {selectedState.mainIssues.map((issue, idx) => (
                       <li key={idx} className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full flex-shrink-0"></div>
-                        <span className="text-gray-700 dark:text-slate-300">{issue}</span>
+                        <span className="text-gray-700 dark:text-slate-300">
+                          {issue}
+                        </span>
                       </li>
                     ))}
                   </ul>
