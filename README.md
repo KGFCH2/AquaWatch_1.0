@@ -102,20 +102,20 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 1. **Clone the repository**
 
-   ```bash
+   ```
    git clone https://github.com/Atanu2k4/AquaWatch_1.0.git
    cd AquaWatch_1.0
    ```
 
 2. **Install frontend dependencies**
 
-   ```bash
+   ```
    cd frontend
    npm install
    ```
 
 3. **Install backend dependencies** (optional, for data processing)
-   ```bash
+   ```
    cd ../backend
    pip install pandas firebase-admin
    ```
@@ -124,7 +124,7 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 1. **Start the development server**
 
-   ```bash
+   ```
    cd frontend
    npm run dev
    ```
@@ -133,18 +133,18 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 2. **Build for production**
 
-   ```bash
+   ```
    npm run build
    ```
 
 3. **Preview production build**
 
-   ```bash
+   ```
    npm run preview
    ```
 
 4. **Run linting**
-   ```bash
+   ```
    npm run lint
    ```
 
@@ -152,13 +152,13 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 1. **Convert CSV to JSON** (requires data/groundwater_india.csv)
 
-   ```bash
+   ```
    cd backend
    python analyse_csv.py
    ```
 
 2. **Upload to Firebase** (requires Firebase credentials)
-   ```bash
+   ```
    python upload_to_firebase.py
    ```
 
@@ -197,7 +197,7 @@ If you want to enable Firebase integration:
 
 Create a `.env` file in the frontend directory:
 
-```env
+```
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 VITE_FIREBASE_PROJECT_ID=your_project_id
