@@ -34,38 +34,37 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 ## Project Structure
 
-```
-AquaWatch_1.0/
-├── frontend/                 # React + TypeScript frontend application
-│   ├── src/
-│   │   ├── components/       # Reusable React components
-│   │   │   ├── AlertsPanel.tsx          # Water crisis alerts system
-│   │   │   ├── CrisisOverview.tsx       # National crisis statistics
-│   │   │   ├── DataMethodologyModal.tsx # Data sources modal
-│   │   │   ├── EmergencyModal.tsx       # Emergency response system
-│   │   │   ├── Footer.tsx               # Application footer
-│   │   │   ├── Header.tsx               # Navigation header
-│   │   │   ├── LoadingScreen.tsx        # Loading animation
-│   │   │   ├── Solutions.tsx            # Water management solutions
-│   │   │   └── StateGrid.tsx            # Interactive state grid
-│   │   ├── App.tsx           # Main application component
-│   │   ├── main.tsx          # Application entry point
-│   │   ├── index.css         # Global styles with Tailwind CSS
-│   │   └── vite-env.d.ts     # TypeScript environment definitions
-│   ├── index.html            # HTML entry point
-│   ├── package.json          # Frontend dependencies
-│   ├── vite.config.ts        # Vite build configuration
-│   ├── tailwind.config.js    # Tailwind CSS configuration
-│   ├── postcss.config.js     # PostCSS configuration
-│   ├── eslint.config.js      # ESLint configuration
-│   ├── tsconfig.json         # TypeScript configuration
-│   ├── tsconfig.app.json     # App-specific TypeScript config
-│   └── tsconfig.node.json    # Node-specific TypeScript config
-└── backend/                  # Python data processing scripts
-    ├── analyse_csv.py        # CSV to JSON data conversion
-    ├── upload_to_firebase.py # Firebase Firestore data upload
-    └── .gitignore            # Git ignore for sensitive files
-```
+**AquaWatch_1.0/**
+
+- **frontend/** - React + TypeScript frontend application
+  - **src/**
+    - **components/** - Reusable React components
+      - AlertsPanel.tsx - Water crisis alerts system
+      - CrisisOverview.tsx - National crisis statistics
+      - DataMethodologyModal.tsx - Data sources modal
+      - EmergencyModal.tsx - Emergency response system
+      - Footer.tsx - Application footer
+      - Header.tsx - Navigation header
+      - LoadingScreen.tsx - Loading animation
+      - Solutions.tsx - Water management solutions
+      - StateGrid.tsx - Interactive state grid
+    - App.tsx - Main application component
+    - main.tsx - Application entry point
+    - index.css - Global styles with Tailwind CSS
+    - vite-env.d.ts - TypeScript environment definitions
+  - index.html - HTML entry point
+  - package.json - Frontend dependencies
+  - vite.config.ts - Vite build configuration
+  - tailwind.config.js - Tailwind CSS configuration
+  - postcss.config.js - PostCSS configuration
+  - eslint.config.js - ESLint configuration
+  - tsconfig.json - TypeScript configuration
+  - tsconfig.app.json - App-specific TypeScript config
+  - tsconfig.node.json - Node-specific TypeScript config
+- **backend/** - Python data processing scripts
+  - analyse_csv.py - CSV to JSON data conversion
+  - upload_to_firebase.py - Firebase Firestore data upload
+  - .gitignore - Git ignore for sensitive files
 
 ## Technology Stack
 
