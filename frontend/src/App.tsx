@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import { LoadingScreen } from './components/LoadingScreen';
-import { Header } from './components/Header';
-import { CrisisOverview } from './components/CrisisOverview';
-import { StateGrid } from './components/StateGrid';
-import { Solutions } from './components/Solutions';
-import { AlertsPanel } from './components/AlertsPanel';
-import { Footer } from './components/Footer';
-import { EmergencyModal } from './components/EmergencyModal';
-import { DataMethodologyModal } from './components/DataMethodologyModal';
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { LoadingScreen } from "./components/LoadingScreen";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { EmergencyModal } from "./components/EmergencyModal";
+import { DataMethodologyModal } from "./components/DataMethodologyModal";
+import { HomePage } from "./pages/HomePage";
+import { SolutionsPage } from "./pages/SolutionsPage";
+import { AlertsPage } from "./pages/AlertsPage";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
-  const [emergencyType, setEmergencyType] = useState<'response' | 'contacts'>('response');
-  const [selectedState, setSelectedState] = useState<string>('');
+  const [emergencyType, setEmergencyType] = useState<"response" | "contacts">(
+    "response"
+  );
+  const [selectedState, setSelectedState] = useState<string>("");
   const [showMethodologyModal, setShowMethodologyModal] = useState(false);
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-    setMobileMenuOpen(false);
   };
 
   React.useEffect(() => {
@@ -38,44 +39,40 @@ function App() {
 
   React.useEffect(() => {
     const handleEmergencyResponse = () => {
-      setEmergencyType('response');
+      setEmergencyType("response");
       setShowEmergencyModal(true);
     };
 
     const handleEmergencyContacts = (event: CustomEvent) => {
-      setEmergencyType('contacts');
+      setEmergencyType("contacts");
       setSelectedState(event.detail.state);
       setShowEmergencyModal(true);
-    };
-
-    const handleNavigateToSolutions = (event: CustomEvent) => {
-      setActiveTab('solutions');
-      setSelectedState(event.detail.state);
-    };
-
-    const handleNavigateToTab = (event: CustomEvent) => {
-      setActiveTab(event.detail.tab);
-      setMobileMenuOpen(false);
-      // Scroll to top when changing tabs
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleShowDataMethodology = () => {
       setShowMethodologyModal(true);
     };
 
-    window.addEventListener('showEmergencyResponse', handleEmergencyResponse);
-    window.addEventListener('showEmergencyContacts', handleEmergencyContacts as EventListener);
-    window.addEventListener('navigateToSolutions', handleNavigateToSolutions as EventListener);
-    window.addEventListener('navigateToTab', handleNavigateToTab as EventListener);
-    window.addEventListener('showDataMethodology', handleShowDataMethodology);
+    window.addEventListener("showEmergencyResponse", handleEmergencyResponse);
+    window.addEventListener(
+      "showEmergencyContacts",
+      handleEmergencyContacts as EventListener
+    );
+    window.addEventListener("showDataMethodology", handleShowDataMethodology);
 
     return () => {
-      window.removeEventListener('showEmergencyResponse', handleEmergencyResponse);
-      window.removeEventListener('showEmergencyContacts', handleEmergencyContacts as EventListener);
-      window.removeEventListener('navigateToSolutions', handleNavigateToSolutions as EventListener);
-      window.removeEventListener('navigateToTab', handleNavigateToTab as EventListener);
-      window.removeEventListener('showDataMethodology', handleShowDataMethodology);
+      window.removeEventListener(
+        "showEmergencyResponse",
+        handleEmergencyResponse
+      );
+      window.removeEventListener(
+        "showEmergencyContacts",
+        handleEmergencyContacts as EventListener
+      );
+      window.removeEventListener(
+        "showDataMethodology",
+        handleShowDataMethodology
+      );
     };
   }, []);
 
@@ -84,43 +81,44 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <Header 
-        onMobileMenuToggle={handleMobileMenuToggle}
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        mobileMenuOpen={mobileMenuOpen}
-      />
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main">
-        {activeTab === 'dashboard' && (
-          <>
-            <CrisisOverview />
-            <StateGrid />
-          </>
-        )}
-        
-        {activeTab === 'solutions' && <Solutions />}
-        
-        {activeTab === 'alerts' && <AlertsPanel />}
-      </main>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+        <Header
+          onMobileMenuToggle={handleMobileMenuToggle}
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+        />
 
-      <Footer />
-      
-      {showEmergencyModal && (
-        <EmergencyModal
-          type={emergencyType}
-          state={selectedState}
-          onClose={() => setShowEmergencyModal(false)}
-        />
-      )}
-      
-      {showMethodologyModal && (
-        <DataMethodologyModal
-          onClose={() => setShowMethodologyModal(false)}
-        />
-      )}
-    </div>
+        <main
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+          role="main"
+        >
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/dashboard" element={<Navigate to="/" replace />} />
+            <Route path="/solutions" element={<SolutionsPage />} />
+            <Route path="/alerts" element={<AlertsPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+
+        <Footer />
+
+        {showEmergencyModal && (
+          <EmergencyModal
+            type={emergencyType}
+            state={selectedState}
+            onClose={() => setShowEmergencyModal(false)}
+          />
+        )}
+
+        {showMethodologyModal && (
+          <DataMethodologyModal
+            onClose={() => setShowMethodologyModal(false)}
+          />
+        )}
+      </div>
+    </Router>
   );
 }
 
