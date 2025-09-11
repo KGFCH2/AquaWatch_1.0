@@ -34,7 +34,7 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 ## Project Structure
 
-```text
+```
 AquaWatch_1.0/
 ├── frontend/                 # React + TypeScript frontend application
 │   ├── src/
