@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -81,44 +82,46 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <Header
-          onMobileMenuToggle={handleMobileMenuToggle}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-        />
-
-        <main
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
-          role="main"
-        >
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/dashboard" element={<Navigate to="/" replace />} />
-            <Route path="/solutions" element={<SolutionsPage />} />
-            <Route path="/alerts" element={<AlertsPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-
-        <Footer />
-
-        {showEmergencyModal && (
-          <EmergencyModal
-            type={emergencyType}
-            state={selectedState}
-            onClose={() => setShowEmergencyModal(false)}
+    <ThemeProvider>
+      <Router>
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-dark-bg dark:to-slate-900 transition-colors duration-300">
+          <Header
+            onMobileMenuToggle={handleMobileMenuToggle}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
           />
-        )}
 
-        {showMethodologyModal && (
-          <DataMethodologyModal
-            onClose={() => setShowMethodologyModal(false)}
-          />
-        )}
-      </div>
-    </Router>
+          <main
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+            role="main"
+          >
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/dashboard" element={<Navigate to="/" replace />} />
+              <Route path="/solutions" element={<SolutionsPage />} />
+              <Route path="/alerts" element={<AlertsPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+
+          <Footer />
+
+          {showEmergencyModal && (
+            <EmergencyModal
+              type={emergencyType}
+              state={selectedState}
+              onClose={() => setShowEmergencyModal(false)}
+            />
+          )}
+
+          {showMethodologyModal && (
+            <DataMethodologyModal
+              onClose={() => setShowMethodologyModal(false)}
+            />
+          )}
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

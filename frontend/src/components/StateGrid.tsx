@@ -463,15 +463,15 @@ const statesData: StateData[] = [
 const getSeverityColor = (severity: string) => {
   switch (severity) {
     case "critical":
-      return "bg-red-100 text-red-800 border-red-200";
+      return "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 border-red-200 dark:border-red-700";
     case "high":
-      return "bg-orange-100 text-orange-800 border-orange-200";
+      return "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 border-orange-200 dark:border-orange-700";
     case "moderate":
-      return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      return "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 border-yellow-200 dark:border-yellow-700";
     case "low":
-      return "bg-green-100 text-green-800 border-green-200";
+      return "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 border-green-200 dark:border-green-700";
     default:
-      return "bg-gray-100 text-gray-800 border-gray-200";
+      return "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-600";
   }
 };
 
@@ -510,10 +510,13 @@ export const StateGrid: React.FC = () => {
   return (
     <section aria-labelledby="states-title">
       <div className="mb-6">
-        <h2 id="states-title" className="text-2xl font-bold text-gray-900 mb-2">
+        <h2
+          id="states-title"
+          className="text-2xl font-bold text-gray-900 dark:text-white mb-2"
+        >
           State-wise Water Crisis Status
         </h2>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-slate-300">
           Click on any state to view detailed information and recommended
           solutions.
         </p>
@@ -523,7 +526,7 @@ export const StateGrid: React.FC = () => {
         {statesData.map((state, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="bg-white dark:bg-dark-surface rounded-xl shadow-lg border border-gray-100 dark:border-dark-border p-6 hover:shadow-xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             onClick={() => setSelectedState(state)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -537,8 +540,8 @@ export const StateGrid: React.FC = () => {
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-gray-500" aria-hidden="true" />
-                <h3 className="font-semibold text-gray-900">{state.name}</h3>
+                <MapPin className="h-5 w-5 text-gray-500 dark:text-slate-400" aria-hidden="true" />
+                <h3 className="font-semibold text-gray-900 dark:text-white">{state.name}</h3>
               </div>
               {getTrendIcon(state.trend)}
             </div>
@@ -558,10 +561,10 @@ export const StateGrid: React.FC = () => {
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Water Availability</span>
-                  <span className="font-medium">{state.waterLevel}%</span>
+                  <span className="text-gray-600 dark:text-slate-300">Water Availability</span>
+                  <span className="font-medium text-gray-900 dark:text-white">{state.waterLevel}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full transition-all duration-500 ${
                       state.waterLevel < 30
@@ -582,7 +585,7 @@ export const StateGrid: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-slate-300">
                 <p>
                   <span className="font-medium">Population:</span>{" "}
                   {state.population}
@@ -607,20 +610,20 @@ export const StateGrid: React.FC = () => {
           aria-modal="true"
         >
           <div
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3
                   id="modal-title"
-                  className="text-2xl font-bold text-gray-900"
+                  className="text-2xl font-bold text-gray-900 dark:text-white"
                 >
                   {selectedState.name} - Crisis Details
                 </h3>
                 <button
                   onClick={() => setSelectedState(null)}
-                  className="text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  className="text-gray-400 dark:text-slate-400 hover:text-gray-600 dark:hover:text-slate-300 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
                   aria-label="Close modal"
                 >
                   ×
@@ -629,23 +632,23 @@ export const StateGrid: React.FC = () => {
 
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                     Current Status
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600">
+                    <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
+                      <p className="text-sm text-gray-600 dark:text-slate-300">
                         Water Availability
                       </p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white">
                         {selectedState.waterLevel}%
                       </p>
                     </div>
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm text-gray-600">
+                    <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg">
+                      <p className="text-sm text-gray-600 dark:text-slate-300">
                         Population Affected
                       </p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white">
                         {selectedState.population}
                       </p>
                     </div>
@@ -653,14 +656,14 @@ export const StateGrid: React.FC = () => {
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                     Main Issues
                   </h4>
                   <ul className="space-y-2">
                     {selectedState.mainIssues.map((issue, idx) => (
                       <li key={idx} className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0"></div>
-                        <span className="text-gray-700">{issue}</span>
+                        <div className="w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full flex-shrink-0"></div>
+                        <span className="text-gray-700 dark:text-slate-300">{issue}</span>
                       </li>
                     ))}
                   </ul>
@@ -668,7 +671,7 @@ export const StateGrid: React.FC = () => {
 
                 <div className="flex space-x-4">
                   <button
-                    className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="flex-1 bg-blue-600 dark:bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     onClick={() => {
                       setSelectedState(null);
                       // Navigate to solutions page
@@ -678,7 +681,7 @@ export const StateGrid: React.FC = () => {
                     View Solutions
                   </button>
                   <button
-                    className="flex-1 bg-gray-100 text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                    className="flex-1 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-slate-100 px-6 py-3 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                     onClick={() => {
                       setSelectedState(null);
                       // Show emergency contacts modal

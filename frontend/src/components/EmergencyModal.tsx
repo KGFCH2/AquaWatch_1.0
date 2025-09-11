@@ -118,20 +118,20 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
       aria-modal="true"
     >
       <div 
-        className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <AlertTriangle className="h-8 w-8 text-red-600" aria-hidden="true" />
-              <h2 id="emergency-modal-title" className="text-2xl font-bold text-gray-900">
+              <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" aria-hidden="true" />
+              <h2 id="emergency-modal-title" className="text-2xl font-bold text-gray-900 dark:text-white">
                 {type === 'response' ? 'Emergency Response Plan' : `Emergency Contacts - ${state}`}
               </h2>
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-1"
+              className="text-gray-400 dark:text-slate-400 hover:text-gray-600 dark:hover:text-slate-300 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-1"
               aria-label="Close modal"
             >
               <X className="h-6 w-6" />
@@ -141,75 +141,75 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
           {type === 'response' ? (
             <div className="space-y-8">
               {/* Immediate Response */}
-              <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <AlertTriangle className="h-6 w-6 text-red-600" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-red-800">Immediate Response (0-24 hours)</h3>
+                  <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400" aria-hidden="true" />
+                  <h3 className="text-xl font-semibold text-red-800 dark:text-red-200">Immediate Response (0-24 hours)</h3>
                 </div>
                 <ul className="space-y-3">
                   {emergencyResponsePlan.immediate.map((action, index) => (
                     <li key={index} className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-300 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="text-red-700">{action}</span>
+                      <span className="text-red-700 dark:text-red-300">{action}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Short-term Response */}
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
+              <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <Truck className="h-6 w-6 text-orange-600" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-orange-800">Short-term Response (1-4 weeks)</h3>
+                  <Truck className="h-6 w-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
+                  <h3 className="text-xl font-semibold text-orange-800 dark:text-orange-200">Short-term Response (1-4 weeks)</h3>
                 </div>
                 <ul className="space-y-3">
                   {emergencyResponsePlan.shortTerm.map((action, index) => (
                     <li key={index} className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-300 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="text-orange-700">{action}</span>
+                      <span className="text-orange-700 dark:text-orange-300">{action}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Long-term Response */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <Droplets className="h-6 w-6 text-blue-600" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-blue-800">Long-term Recovery (1+ months)</h3>
+                  <Droplets className="h-6 w-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                  <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-200">Long-term Recovery (1+ months)</h3>
                 </div>
                 <ul className="space-y-3">
                   {emergencyResponsePlan.longTerm.map((action, index) => (
                     <li key={index} className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
-                      <span className="text-blue-700">{action}</span>
+                      <span className="text-blue-700 dark:text-blue-300">{action}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* National Helpline */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">24/7 National Crisis Helpline</h3>
+              <div className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg p-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-slate-200 mb-4">24/7 National Crisis Helpline</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-center space-x-3">
-                    <Phone className="h-6 w-6 text-green-600" aria-hidden="true" />
+                    <Phone className="h-6 w-6 text-green-600 dark:text-green-400" aria-hidden="true" />
                     <div>
-                      <p className="font-semibold text-gray-900">Emergency Hotline</p>
-                      <p className="text-2xl font-bold text-green-600">1800-WATER-911</p>
+                      <p className="font-semibold text-gray-900 dark:text-slate-100">Emergency Hotline</p>
+                      <p className="text-2xl font-bold text-green-600 dark:text-green-400">1800-WATER-911</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Mail className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                    <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
                     <div>
-                      <p className="font-semibold text-gray-900">Crisis Email</p>
-                      <p className="text-lg font-semibold text-blue-600">crisis@aquawatch.gov.in</p>
+                      <p className="font-semibold text-gray-900 dark:text-slate-100">Crisis Email</p>
+                      <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">crisis@aquawatch.gov.in</p>
                     </div>
                   </div>
                 </div>
@@ -219,29 +219,29 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
             <div className="space-y-6">
               {stateContacts ? (
                 <>
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                    <h3 className="text-xl font-semibold text-blue-800 mb-4">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-200 mb-4">
                       {stateContacts.state} Water Crisis Contacts
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {stateContacts.contacts.map((contact, index) => (
-                        <div key={index} className="bg-white rounded-lg p-4 border border-blue-100">
-                          <h4 className="font-semibold text-gray-900 mb-3">{contact.type}</h4>
+                        <div key={index} className="bg-white dark:bg-slate-700 rounded-lg p-4 border border-blue-100 dark:border-slate-600">
+                          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">{contact.type}</h4>
                           <div className="space-y-2">
                             <div className="flex items-center space-x-2">
-                              <Phone className="h-4 w-4 text-green-600" aria-hidden="true" />
+                              <Phone className="h-4 w-4 text-green-600 dark:text-green-400" aria-hidden="true" />
                               <a 
                                 href={`tel:${contact.phone}`}
-                                className="text-green-600 hover:text-green-800 font-medium focus:outline-none focus:underline"
+                                className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 font-medium focus:outline-none focus:underline"
                               >
                                 {contact.phone}
                               </a>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Mail className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                              <Mail className="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true" />
                               <a 
                                 href={`mailto:${contact.email}`}
-                                className="text-blue-600 hover:text-blue-800 text-sm focus:outline-none focus:underline"
+                                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm focus:outline-none focus:underline"
                               >
                                 {contact.email}
                               </a>
@@ -252,21 +252,21 @@ export const EmergencyModal: React.FC<EmergencyModalProps> = ({ type, state, onC
                     </div>
                   </div>
 
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-                    <h3 className="text-xl font-semibold text-red-800 mb-4">Emergency Water Supply Locations</h3>
+                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-red-800 dark:text-red-200 mb-4">Emergency Water Supply Locations</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex items-start space-x-3">
-                        <MapPin className="h-5 w-5 text-red-600 mt-1" aria-hidden="true" />
+                        <MapPin className="h-5 w-5 text-red-600 dark:text-red-400 mt-1" aria-hidden="true" />
                         <div>
-                          <p className="font-semibold text-red-800">Central Distribution Center</p>
-                          <p className="text-red-700 text-sm">Main City Center - 24/7 Operations</p>
+                          <p className="font-semibold text-red-800 dark:text-red-200">Central Distribution Center</p>
+                          <p className="text-red-700 dark:text-red-300 text-sm">Main City Center - 24/7 Operations</p>
                         </div>
                       </div>
                       <div className="flex items-start space-x-3">
-                        <MapPin className="h-5 w-5 text-red-600 mt-1" aria-hidden="true" />
+                        <MapPin className="h-5 w-5 text-red-600 dark:text-red-400 mt-1" aria-hidden="true" />
                         <div>
-                          <p className="font-semibold text-red-800">Mobile Water Tankers</p>
-                          <p className="text-red-700 text-sm">Call helpline for nearest location</p>
+                          <p className="font-semibold text-red-800 dark:text-red-200">Mobile Water Tankers</p>
+                          <p className="text-red-700 dark:text-red-300 text-sm">Call helpline for nearest location</p>
                         </div>
                       </div>
                     </div>
