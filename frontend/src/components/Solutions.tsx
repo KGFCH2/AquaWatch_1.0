@@ -166,7 +166,9 @@ const categories = [
 
 export const Solutions: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [expandedSolution, setExpandedSolution] = useState<string | null>(null);
+  const [expandedSolutions, setExpandedSolutions] = useState<Set<string>>(
+    new Set()
+  );
   const navigate = useNavigate();
 
   const filteredSolutions =
@@ -174,16 +176,28 @@ export const Solutions: React.FC = () => {
       ? solutions
       : solutions.filter((solution) => solution.category === selectedCategory);
 
+  const toggleSolutionExpansion = (solutionId: string) => {
+    setExpandedSolutions((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(solutionId)) {
+        newSet.delete(solutionId);
+      } else {
+        newSet.add(solutionId);
+      }
+      return newSet;
+    });
+  };
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "immediate":
-        return "bg-green-100 text-green-800 border-green-200";
+        return "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-700";
       case "short-term":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+        return "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-700";
       case "long-term":
-        return "bg-blue-100 text-blue-800 border-blue-200";
+        return "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-700";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
+        return "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border-gray-200 dark:border-gray-600";
     }
   };
 
@@ -193,7 +207,7 @@ export const Solutions: React.FC = () => {
       <div className="mb-6">
         <button
           onClick={() => navigate("/")}
-          className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
+          className="flex items-center space-x-2 text-blue-600 dark:text-water-400 hover:text-blue-800 dark:hover:text-water-300 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
           aria-label="Go back to dashboard"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -204,11 +218,11 @@ export const Solutions: React.FC = () => {
       <div className="mb-8">
         <h2
           id="solutions-title"
-          className="text-3xl font-bold text-gray-900 mb-4"
+          className="text-3xl font-bold text-gray-900 dark:text-white mb-4"
         >
           Water Crisis Recovery Solutions
         </h2>
-        <p className="text-gray-600 max-w-4xl">
+        <p className="text-gray-600 dark:text-slate-300 max-w-4xl">
           Comprehensive solutions for addressing India's water crisis at
           individual, community, and state levels. Each solution includes
           implementation steps, cost estimates, and real-world examples.
@@ -225,7 +239,7 @@ export const Solutions: React.FC = () => {
               className={`px-4 py-2 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                 selectedCategory === category.id
                   ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                  : "bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-300 border-gray-300 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700"
               }`}
               aria-label={`Filter by ${category.label}`}
             >
@@ -236,27 +250,27 @@ export const Solutions: React.FC = () => {
       </div>
 
       {/* Solutions Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8">
         {filteredSolutions.map((solution) => {
           const Icon = solution.icon;
-          const isExpanded = expandedSolution === solution.id;
+          const isExpanded = expandedSolutions.has(solution.id);
 
           return (
             <div
               key={solution.id}
-              className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300 self-start"
             >
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
-                    <div className="p-3 bg-blue-50 rounded-lg">
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
                       <Icon
-                        className="h-6 w-6 text-blue-600"
+                        className="h-6 w-6 text-blue-600 dark:text-blue-400"
                         aria-hidden="true"
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                         {solution.title}
                       </h3>
                       <span
@@ -271,34 +285,38 @@ export const Solutions: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-600 mb-4">{solution.description}</p>
+                <p className="text-gray-600 dark:text-slate-300 mb-4">
+                  {solution.description}
+                </p>
 
                 <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
                   <div>
-                    <p className="text-gray-500">Impact</p>
-                    <p className="font-semibold text-gray-900">
+                    <p className="text-gray-500 dark:text-slate-400">Impact</p>
+                    <p className="font-semibold text-gray-900 dark:text-white">
                       {solution.impact}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Timeline</p>
-                    <p className="font-semibold text-gray-900">
+                    <p className="text-gray-500 dark:text-slate-400">
+                      Timeline
+                    </p>
+                    <p className="font-semibold text-gray-900 dark:text-white">
                       {solution.timeline}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Cost Range</p>
-                    <p className="font-semibold text-gray-900">
+                    <p className="text-gray-500 dark:text-slate-400">
+                      Cost Range
+                    </p>
+                    <p className="font-semibold text-gray-900 dark:text-white">
                       {solution.cost}
                     </p>
                   </div>
                 </div>
 
                 <button
-                  onClick={() =>
-                    setExpandedSolution(isExpanded ? null : solution.id)
-                  }
-                  className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                  onClick={() => toggleSolutionExpansion(solution.id)}
+                  className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                   aria-expanded={isExpanded}
                   aria-label={`${
                     isExpanded ? "Collapse" : "Expand"
@@ -315,10 +333,10 @@ export const Solutions: React.FC = () => {
               </div>
 
               {isExpanded && (
-                <div className="px-6 pb-6 border-t border-gray-100 pt-6">
+                <div className="px-6 pb-6 border-t border-gray-100 dark:border-slate-700 pt-6">
                   <div className="space-y-6">
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
                         Implementation Steps
                       </h4>
                       <ol className="space-y-2">
@@ -327,17 +345,19 @@ export const Solutions: React.FC = () => {
                             key={index}
                             className="flex items-start space-x-3"
                           >
-                            <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-sm font-medium">
                               {index + 1}
                             </span>
-                            <span className="text-gray-700">{step}</span>
+                            <span className="text-gray-700 dark:text-slate-300">
+                              {step}
+                            </span>
                           </li>
                         ))}
                       </ol>
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
                         Success Examples
                       </h4>
                       <ul className="space-y-2">
@@ -346,8 +366,10 @@ export const Solutions: React.FC = () => {
                             key={index}
                             className="flex items-start space-x-2"
                           >
-                            <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-700">{example}</span>
+                            <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                            <span className="text-gray-700 dark:text-slate-300">
+                              {example}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -361,22 +383,26 @@ export const Solutions: React.FC = () => {
       </div>
 
       {/* Emergency Helpline */}
-      <div className="mt-12 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-xl p-6">
-        <h3 className="text-xl font-semibold text-red-800 mb-4">
+      <div className="mt-12 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">
+        <h3 className="text-xl font-semibold text-red-800 dark:text-red-300 mb-4">
           Need Immediate Help?
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <p className="text-red-700 mb-2">
+            <p className="text-red-700 dark:text-red-300 mb-2">
               <strong>National Water Crisis Helpline:</strong>
             </p>
-            <p className="text-2xl font-bold text-red-800">1800-11-WATER</p>
+            <p className="text-2xl font-bold text-red-800 dark:text-red-200">
+              1800-11-WATER
+            </p>
           </div>
           <div>
-            <p className="text-red-700 mb-2">
+            <p className="text-red-700 dark:text-red-300 mb-2">
               <strong>Emergency Services:</strong>
             </p>
-            <p className="text-lg font-semibold text-red-800">Available 24/7</p>
+            <p className="text-lg font-semibold text-red-800 dark:text-red-200">
+              Available 24/7
+            </p>
           </div>
         </div>
       </div>
