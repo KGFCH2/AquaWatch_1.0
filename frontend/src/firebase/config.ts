@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCRq87OFt6hZWIhZqPWVHKLtf-tsjU0_24",
-  authDomain: "aquawatch2-b8ee0.firebaseapp.com",
-  projectId: "aquawatch2-b8ee0",
-  storageBucket: "aquawatch2-b8ee0.firebasestorage.app",
-  messagingSenderId: "223585886676",
-  appId: "1:223585886676:web:01d324f50aa0165d177641",
-  measurementId: "G-4KFSCJJS6V",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  Droplets,
   Menu,
   X,
   Bell,
@@ -108,9 +107,10 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg px-2 py-1"
             aria-label="Go to AquaWatch home page"
           >
-            <Droplets
-              className="h-8 w-8 text-blue-300 dark:text-water-400"
-              aria-hidden="true"
+            <img
+              src="/t2-removebg-preview.png"
+              alt="AquaWatch Logo"
+              className="h-10 w-9 object-cover"
             />
             <div>
               <h1 className="text-xl font-bold">AquaWatch</h1>
