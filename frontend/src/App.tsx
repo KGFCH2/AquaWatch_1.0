@@ -6,17 +6,23 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { WaterDataProvider } from "./contexts/WaterDataContext";
 import { LoadingScreen } from "./components/LoadingScreen";
+import { Authentication } from "./components/Authentication";
+import { UserDatabase } from "./components/UserDatabase";
+import AdminDashboard from "./components/AdminDashboard";
+import UserDashboard from "./components/UserDashboard";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { EmergencyModal } from "./components/EmergencyModal";
 import { DataMethodologyModal } from "./components/DataMethodologyModal";
-import { HomePage } from "./pages/HomePage";
 import { SolutionsPage } from "./pages/SolutionsPage";
 import { AlertsPage } from "./pages/AlertsPage";
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
+const AppContent: React.FC = () => {
+  const { currentUser, isAdmin } = useAuth();
+  const [isAppLoading, setIsAppLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
   const [emergencyType, setEmergencyType] = useState<"response" | "contacts">(
@@ -24,15 +30,20 @@ function App() {
   );
   const [selectedState, setSelectedState] = useState<string>("");
   const [showMethodologyModal, setShowMethodologyModal] = useState(false);
+  const [authComplete, setAuthComplete] = useState(false);
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleAuthSuccess = () => {
+    setAuthComplete(true);
+  };
+
   React.useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      setIsAppLoading(false);
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -77,13 +88,48 @@ function App() {
     };
   }, []);
 
-  if (isLoading) {
+  if (isAppLoading) {
     return <LoadingScreen />;
   }
 
-  return (
-    <ThemeProvider>
+  // Show authentication if user is not logged in
+  if (!currentUser && !authComplete) {
+    return <Authentication onSuccess={handleAuthSuccess} />;
+  }
+
+  // Redirect admin users to admin dashboard
+  if (currentUser && isAdmin) {
+    return (
       <Router>
+        <WaterDataProvider>
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-dark-bg dark:to-slate-900 transition-colors duration-300">
+            <Header
+              onMobileMenuToggle={handleMobileMenuToggle}
+              mobileMenuOpen={mobileMenuOpen}
+              setMobileMenuOpen={setMobileMenuOpen}
+            />
+
+            <main
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+              role="main"
+            >
+              <Routes>
+                <Route path="/" element={<AdminDashboard />} />
+                <Route path="/admin/users" element={<UserDatabase />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+
+            <Footer />
+          </div>
+        </WaterDataProvider>
+      </Router>
+    );
+  }
+
+  return (
+    <Router>
+      <WaterDataProvider>
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-dark-bg dark:to-slate-900 transition-colors duration-300">
           <Header
             onMobileMenuToggle={handleMobileMenuToggle}
@@ -96,8 +142,8 @@ function App() {
             role="main"
           >
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/dashboard" element={<Navigate to="/" replace />} />
+              <Route path="/" element={<UserDashboard />} />
+              <Route path="/dashboard" element={<UserDashboard />} />
               <Route path="/solutions" element={<SolutionsPage />} />
               <Route path="/alerts" element={<AlertsPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
@@ -120,7 +166,17 @@ function App() {
             />
           )}
         </div>
-      </Router>
+      </WaterDataProvider>
+    </Router>
+  );
+};
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
