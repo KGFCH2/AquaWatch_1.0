@@ -5,7 +5,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Water-themed color palette
         water: {
           50: "#f0f9ff",
           100: "#e0f2fe",
@@ -32,13 +31,52 @@ export default {
           900: "#624629",
           950: "#352414",
         },
-        // Dark mode specific colors
         dark: {
           bg: "#0f172a",
           surface: "#1e293b",
           border: "#334155",
           text: "#cbd5e1",
           muted: "#64748b",
+        },
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
         },
       },
       animation: {
@@ -47,16 +85,34 @@ export default {
       },
       keyframes: {
         "water-flow": {
-          "0%, 100%": { transform: "translateX(0) rotate(0deg)" },
-          "50%": { transform: "translateX(2px) rotate(1deg)" },
+          "0%, 100%": {
+            transform: "translateX(0) rotate(0deg)",
+          },
+          "50%": {
+            transform: "translateX(2px) rotate(1deg)",
+          },
         },
         bubble: {
-          "0%": { transform: "translateY(0) scale(1)", opacity: "0.7" },
-          "50%": { transform: "translateY(-4px) scale(1.1)", opacity: "1" },
-          "100%": { transform: "translateY(0) scale(1)", opacity: "0.7" },
+          "0%": {
+            transform: "translateY(0) scale(1)",
+            opacity: "0.7",
+          },
+          "50%": {
+            transform: "translateY(-4px) scale(1.1)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(0) scale(1)",
+            opacity: "0.7",
+          },
         },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };

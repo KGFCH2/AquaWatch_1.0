@@ -102,7 +102,7 @@ const AppContent: React.FC = () => {
     return (
       <Router>
         <WaterDataProvider>
-          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-dark-bg dark:to-slate-900 transition-colors duration-300">
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-950 transition-colors duration-300">
             <Header
               onMobileMenuToggle={handleMobileMenuToggle}
               mobileMenuOpen={mobileMenuOpen}
@@ -130,7 +130,7 @@ const AppContent: React.FC = () => {
   return (
     <Router>
       <WaterDataProvider>
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-dark-bg dark:to-slate-900 transition-colors duration-300">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-950 transition-colors duration-300">
           <Header
             onMobileMenuToggle={handleMobileMenuToggle}
             mobileMenuOpen={mobileMenuOpen}

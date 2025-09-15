@@ -5,6 +5,10 @@ export const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
 
+  const handleToggle = () => {
+    toggleTheme();
+  };
+
   return (
     <label className="inline-flex items-center relative cursor-pointer">
       <input
@@ -12,23 +16,27 @@ export const ThemeToggle: React.FC = () => {
         id="theme-toggle"
         type="checkbox"
         checked={isDark}
-        onChange={toggleTheme}
+        onChange={handleToggle}
         aria-label="Toggle between light and dark mode"
       />
 
       {/* Toggle Background with sliding circle */}
       <div
         className={`
-          relative w-[80px] h-[40px] rounded-full shadow-sm duration-300 transition-all overflow-hidden
-          ${isDark ? "bg-slate-800" : "bg-sky-200"}
+          relative w-[80px] h-[40px] rounded-full shadow-lg duration-300 transition-all overflow-hidden border-2
+          ${
+            isDark
+              ? "bg-slate-800 border-slate-600"
+              : "bg-sky-200 border-sky-300"
+          }
           after:absolute after:content-[''] after:w-[32px] after:h-[32px]
-          after:rounded-full after:top-[4px] after:shadow-md after:duration-300 after:transition-all after:z-10
+          after:rounded-full after:top-[4px] after:shadow-lg after:duration-300 after:transition-all after:z-10
           ${
             isDark
               ? "after:left-[4px] after:bg-gradient-to-r after:from-slate-600 after:to-slate-700"
               : "after:left-[44px] after:bg-gradient-to-r after:from-orange-400 after:to-yellow-400"
           }
-          hover:after:scale-105 active:after:scale-95
+          hover:after:scale-105 active:after:scale-95 hover:shadow-xl
         `}
       ></div>
 
