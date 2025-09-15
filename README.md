@@ -6,12 +6,27 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 ## Features
 
-### Dashboard Overview
+### Admin Dashboard
 
-- **National Crisis Statistics**: Real-time monitoring of states in crisis, water availability levels, affected population, and groundwater depletion rates
+- **National Water Crisis Overview**: Real-time monitoring of states in crisis with comprehensive statistics
 - **State-wise Analysis**: Detailed breakdown of water conditions across all Indian states
-- **Interactive State Grid**: Visual representation of water crisis severity with color-coded indicators
+- **Interactive State Cards**: Clickable state cards with detailed water level history charts
 - **Trend Analysis**: Historical data tracking with up/down/stable trend indicators
+- **User Management**: Admin interface for managing user accounts and access
+
+### User Dashboard
+
+- **Personal Water Level Monitoring**: Real-time water level tracking for user's state
+- **Real-time Graphs**: Interactive charts showing water level trends over time
+- **Status Overview**: Current water status with visual indicators
+- **Quick Actions**: Easy access to emergency contacts and solutions
+
+### Authentication & Security
+
+- **Role-based Access**: Separate dashboards for admin and regular users
+- **Firebase Authentication**: Secure login system with email/password
+- **User Registration**: New user signup with state selection
+- **Session Management**: Persistent login sessions with secure logout
 
 ### Emergency Response
 
@@ -27,6 +42,7 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 
 ### User Experience
 
+- **Dark/Light Theme**: Toggle between dark and light modes
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Loading Animations**: Smooth user experience with elegant loading screens
 - **Accessible Interface**: ARIA-compliant design for screen readers and accessibility tools
@@ -39,15 +55,37 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 - **frontend/** - React + TypeScript frontend application
   - **src/**
     - **components/** - Reusable React components
+      - AdminDashboard.tsx - Admin dashboard with national overview
+      - AdminLogin.tsx - Admin authentication component
       - AlertsPanel.tsx - Water crisis alerts system
-      - CrisisOverview.tsx - National crisis statistics
+      - Authentication.tsx - Main authentication wrapper
       - DataMethodologyModal.tsx - Data sources modal
       - EmergencyModal.tsx - Emergency response system
       - Footer.tsx - Application footer
-      - Header.tsx - Navigation header
+      - Header.tsx - Navigation header with theme toggle
       - LoadingScreen.tsx - Loading animation
+      - RealTimeGraph.tsx - Real-time water level charts
+      - RoleSelection.tsx - User role selection component
       - Solutions.tsx - Water management solutions
-      - StateGrid.tsx - Interactive state grid
+      - StateDetailsPopup.tsx - Detailed state water history popup
+      - ThemeToggle.tsx - Dark/light mode toggle
+      - UserDatabase.tsx - User management interface
+      - UserDashboard.tsx - User dashboard with personal monitoring
+      - UserLogin.tsx - User authentication component
+      - UserSignup.tsx - User registration component
+    - **contexts/** - React context providers
+      - AuthContext.tsx - Authentication state management
+      - ThemeContext.tsx - Theme state management
+      - WaterDataContext.tsx - Water data state management
+    - **firebase/** - Firebase configuration
+      - config.ts - Firebase app configuration
+    - **lib/** - Utility libraries
+      - utils.ts - General utility functions
+    - **pages/** - Page components
+      - AlertsPage.tsx - Alerts page for routing
+      - SolutionsPage.tsx - Solutions page for routing
+    - **utils/** - Utility functions
+      - dataUtils.ts - Data processing utilities
     - App.tsx - Main application component
     - main.tsx - Application entry point
     - index.css - Global styles with Tailwind CSS
@@ -61,9 +99,12 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
   - tsconfig.json - TypeScript configuration
   - tsconfig.app.json - App-specific TypeScript config
   - tsconfig.node.json - Node-specific TypeScript config
-- **backend/** - Python data processing scripts
-  - analyse_csv.py - CSV to JSON data conversion
-  - upload_to_firebase.py - Firebase Firestore data upload
+- **backend/** - Python data processing and API
+  - main.py - FastAPI server for data management
+  - check_firebase_data.py - Firebase data analysis script
+  - upload_csv_data.py - CSV to Firebase upload utility
+  - data/dwlr_india.csv - Water level dataset
+  - aquawatch-42795-firebase-adminsdk-fbsvc-c63652eac0.json - Firebase credentials
   - .gitignore - Git ignore for sensitive files
 
 ## Technology Stack
@@ -75,13 +116,19 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
 - **Vite 5.4.2** - Fast build tool and development server
 - **Tailwind CSS 3.4.1** - Utility-first CSS framework
 - **Lucide React 0.344.0** - Beautiful, customizable icons
-- **Firebase 12.2.1** - Real-time database and hosting
+- **Firebase 12.2.1** - Real-time database, authentication, and hosting
+- **React Router DOM** - Client-side routing
+- **Chart.js & React-Chartjs-2** - Interactive charts and data visualization
+- **Framer Motion** - Smooth animations and transitions
 
 ### Backend
 
+- **FastAPI** - Modern Python web framework for APIs
 - **Python** - Data processing and analysis
 - **Pandas** - Data manipulation and analysis
 - **Firebase Admin SDK** - Server-side Firebase integration
+- **Watchdog** - File system monitoring for real-time updates
+- **Uvicorn** - ASGI server for FastAPI
 
 ### Development Tools
 
@@ -114,10 +161,10 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
    npm install
    ```
 
-3. **Install backend dependencies** (optional, for data processing)
-   ```
+3. **Install backend dependencies** (optional, for running API server)
+   ```bash
    cd ../backend
-   pip install pandas firebase-admin
+   pip install fastapi uvicorn pandas firebase-admin watchdog
    ```
 
 ### Development
@@ -148,39 +195,68 @@ AquaWatch is a comprehensive web application that provides real-time monitoring 
    npm run lint
    ```
 
-### Backend Data Processing
+### Backend API Server (Optional)
 
-1. **Convert CSV to JSON** (requires data/groundwater_india.csv)
+1. **Start the FastAPI server** (requires data/dwlr_india.csv)
 
-   ```
+   ```bash
    cd backend
-   python analyse_csv.py
+   python main.py
    ```
 
-2. **Upload to Firebase** (requires Firebase credentials)
+   The API will be available at `http://localhost:8000`
+
+2. **Check Firebase data**
+
+   ```bash
+   python check_firebase_data.py
    ```
-   python upload_to_firebase.py
+
+3. **Upload CSV data to Firebase** (requires Firebase credentials)
+   ```bash
+   python upload_csv_data.py
    ```
+
+## Application Architecture
+
+### User Roles
+
+- **Admin Users**: Access to national dashboard, state management, and user administration
+- **Regular Users**: Personal dashboard with state-specific water monitoring
+
+### Data Flow
+
+1. **CSV Data**: Water level data stored in backend/data/dwlr_india.csv
+2. **Firebase Firestore**: Real-time database storing processed water data
+3. **Frontend**: React app consuming Firebase data through contexts
+4. **Authentication**: Firebase Auth managing user sessions and roles
+
+### Key Components
+
+- **WaterDataContext**: Manages water level data across the application
+- **AuthContext**: Handles user authentication and role management
+- **ThemeContext**: Manages dark/light theme preferences
+- **Real-time Updates**: Firebase listeners for live data updates
 
 ## Data Sources
 
-AquaWatch aggregates data from multiple reliable sources:
+AquaWatch integrates data from multiple reliable sources:
 
 - **Government Databases**: Central Ground Water Board (CGWB)
-- **Satellite Data**: Remote sensing for groundwater monitoring
-- **Real-time Sensors**: IoT-enabled water level monitoring systems
-- **Weather Services**: Meteorological data for drought assessment
-- **Population Census**: Demographic data for impact analysis
+- **DWLR Sensors**: Deep Water Level Recorder data from across India
+- **Real-time Monitoring**: IoT-enabled water level monitoring systems
+- **Firebase Integration**: Real-time data synchronization and storage
+- **CSV Processing**: Automated data processing from government datasets
 
-_Data is updated every 6 hours to ensure accuracy and timeliness._
+_Data is updated in real-time through Firebase listeners and CSV monitoring._
 
 ## Key Metrics Tracked
 
-- **Water Availability**: Current reservoir and groundwater levels
-- **Crisis Severity**: State-wise crisis classification (Critical/High/Moderate/Low)
-- **Population Impact**: Number of people affected by water stress
-- **Groundwater Depletion**: Annual decline rates across regions
-- **Trend Analysis**: Month-over-month and year-over-year comparisons
+- **Water Level (m bgl)**: Water depth below ground level in meters
+- **Crisis Status**: State-wise classification (Critical/Warning/Normal/Good)
+- **Real-time Trends**: Live water level changes and historical patterns
+- **State Coverage**: Comprehensive monitoring across Indian states
+- **User Analytics**: Dashboard usage and monitoring patterns
 
 ## Configuration
 
@@ -197,11 +273,24 @@ If you want to enable Firebase integration:
 
 Create a `.env` file in the frontend directory:
 
-```
+```env
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 VITE_FIREBASE_PROJECT_ID=your_project_id
-# ... other Firebase config
+VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+### Backend API Configuration
+
+For the FastAPI backend server, update the configuration in `main.py`:
+
+```python
+# Configuration
+CSV_FILE = "data/dwlr_india.csv"
+COLLECTION_NAME = "DWLR_state"
+API_KEY = "your_api_key_here"
 ```
 
 ## Contributing
@@ -248,4 +337,4 @@ AquaWatch aims to:
 
 **Built for India's water security**
 
-Last updated: September 2025
+Last updated: September 15, 2025
