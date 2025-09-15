@@ -117,7 +117,7 @@ const AdminDashboard: React.FC = () => {
               National Water Crisis Monitoring & Management
             </p>
             <p className="text-orange-200 text-sm mt-1">
-              Comprehensive overview of all states' water levels
+              Comprehensive overview of all states water levels
             </p>
           </div>
           <div className="text-right">
