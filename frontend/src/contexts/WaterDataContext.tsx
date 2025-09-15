@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useAuth } from "./AuthContext";
+import { extractWaterLevel, extractDate } from "../utils/dataUtils";
 
 interface WaterData {
   state: string;
@@ -17,6 +18,10 @@ interface WaterData {
   location?: string;
   capacity?: number;
   currentReserve?: number;
+  historicalData?: Array<{
+    date: Date;
+    waterLevel: number;
+  }>;
 }
 
 interface StateData {
@@ -98,7 +103,7 @@ export const WaterDataProvider: React.FC<{ children: React.ReactNode }> = ({
     return stateWaterData[userState] || null;
   };
 
-  // Get all states data from Firebase
+  // Get all states data from Firebase - Updated to use real DWLR data structure
   const getAllStatesData = async (): Promise<StateData> => {
     try {
       setLoading(true);
@@ -116,26 +121,121 @@ export const WaterDataProvider: React.FC<{ children: React.ReactNode }> = ({
         return getAllStatesData(); // Retry after creating initial data
       }
 
-      querySnapshot.forEach((doc) => {
-        const stateData = doc.data();
-        const stateName = doc.id;
+      // Process each state document
+      for (const stateDoc of querySnapshot.docs) {
+        const stateName = stateDoc.id.replace("_", " "); // Convert back from Firebase document ID format
+        const stateData = stateDoc.data();
 
-        // Extract water level data from the document
-        const waterLevel = stateData.waterLevel || 50; // fallback to 50%
-        const lastUpdated = stateData.lastUpdated?.toDate() || new Date();
+        console.log(`Processing state: ${stateName}`, stateData);
 
-        data[stateName] = {
-          state: stateName,
-          waterLevel: Number(waterLevel),
-          lastUpdated,
-          status: getWaterStatus(Number(waterLevel)),
-          location: stateData.location || stateName,
-          capacity: stateData.capacity || 50000,
-          currentReserve: stateData.currentReserve || Number(waterLevel) * 500,
-        };
-      });
+        try {
+          // Check if the state document already has processed water level data
+          let currentWaterLevel = stateData.waterLevel;
+          let lastUpdated = stateData.lastUpdated?.toDate() || new Date();
+          let historicalData: Array<{ date: Date; waterLevel: number }> = [];
 
-      console.log("Fetched real data from Firebase DWLR_state:", data);
+          // If waterLevel exists and is not the default 50, use it directly
+          if (currentWaterLevel && currentWaterLevel !== 50) {
+            console.log(
+              `Using existing water level for ${stateName}: ${currentWaterLevel}%`
+            );
+          } else {
+            // Try to get the latest data from the state's data subcollection
+            try {
+              const dataCollectionRef = collection(
+                db,
+                "DWLR_state",
+                stateDoc.id,
+                "data"
+              );
+              const dataSnapshot = await getDocs(dataCollectionRef);
+
+              const allDataEntries: Array<{
+                date: Date;
+                waterLevel: number;
+                entry: any;
+              }> = [];
+
+              if (!dataSnapshot.empty) {
+                dataSnapshot.forEach((dataDoc) => {
+                  const entry = dataDoc.data();
+
+                  // Use the utility function to extract water level properly
+                  const waterLevel = extractWaterLevel(entry);
+
+                  // Use the utility function to extract date properly
+                  const entryDate = extractDate(entry);
+
+                  allDataEntries.push({ date: entryDate, waterLevel, entry });
+                });
+
+                // Sort by date to get the most recent data
+                allDataEntries.sort(
+                  (a, b) => b.date.getTime() - a.date.getTime()
+                );
+
+                if (allDataEntries.length > 0) {
+                  currentWaterLevel = allDataEntries[0].waterLevel;
+                  lastUpdated = allDataEntries[0].date;
+
+                  // Store historical data (last 12 months)
+                  historicalData = allDataEntries
+                    .slice(0, 12)
+                    .map((entry) => ({
+                      date: entry.date,
+                      waterLevel: entry.waterLevel,
+                    }));
+
+                  console.log(
+                    `Found real data for ${stateName}: ${currentWaterLevel}% from ${allDataEntries.length} records`
+                  );
+                }
+              }
+            } catch (subCollectionError) {
+              console.log(
+                `No subcollection data for ${stateName}, using default`
+              );
+            }
+
+            // If still no real data found, use default
+            if (!currentWaterLevel) {
+              currentWaterLevel = 50;
+              console.log(
+                `Using fallback data for ${stateName}: ${currentWaterLevel}%`
+              );
+            }
+          }
+
+          data[stateName] = {
+            state: stateName,
+            waterLevel: Number(currentWaterLevel),
+            lastUpdated: lastUpdated,
+            status: getWaterStatus(Number(currentWaterLevel)),
+            location: stateData.location || `${stateName} Region`,
+            capacity: stateData.capacity || 50000,
+            currentReserve:
+              stateData.currentReserve || Number(currentWaterLevel) * 500,
+            historicalData: historicalData,
+          };
+        } catch (stateError) {
+          console.error(`Error processing state ${stateName}:`, stateError);
+
+          // Fallback to basic state data if processing fails
+          const waterLevel = stateData.waterLevel || 50;
+          data[stateName] = {
+            state: stateName,
+            waterLevel: Number(waterLevel),
+            lastUpdated: stateData.lastUpdated?.toDate() || new Date(),
+            status: getWaterStatus(Number(waterLevel)),
+            location: stateData.location || `${stateName} Region`,
+            capacity: stateData.capacity || 50000,
+            currentReserve:
+              stateData.currentReserve || Number(waterLevel) * 500,
+          };
+        }
+      }
+
+      console.log("Processed Firebase DWLR data:", data);
       setStateWaterData(data);
       return data;
     } catch (err) {

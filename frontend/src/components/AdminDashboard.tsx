@@ -1,4 +1,9 @@
-import React from "react";
+// src/components/AdminDashboard.tsx
+
+// UPDATED: Import useState and the new popup component
+import React, { useState } from "react";
+import StateDetailsPopup from "./StateDetailsPopup";
+
 import { useWaterData } from "../contexts/WaterDataContext";
 import {
   Droplets,
@@ -10,8 +15,18 @@ import {
   Waves,
 } from "lucide-react";
 
+// UPDATED: Added a type definition for state data
+interface StateType {
+  state: string;
+  waterLevel: number;
+  status: "critical" | "warning" | "normal" | "good";
+}
+
 const AdminDashboard: React.FC = () => {
   const { stateWaterData, loading, refreshData } = useWaterData();
+
+  // UPDATED: Add state to manage which state is selected for the popup
+  const [selectedState, setSelectedState] = useState<StateType | null>(null);
 
   const handleRefreshData = async () => {
     try {
@@ -90,7 +105,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Admin Welcome Header */}
+      {/* Admin Welcome Header (No changes here) */}
       <div className="bg-gradient-to-r from-orange-500 to-red-600 dark:from-orange-600 dark:to-red-700 rounded-xl p-6 text-white shadow-xl">
         <div className="flex items-center justify-between">
           <div>
@@ -139,7 +154,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* National Overview */}
+      {/* National Overview (No changes here) */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
@@ -158,7 +173,6 @@ const AdminDashboard: React.FC = () => {
             </p>
           </div>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">
             <div className="flex items-center justify-between">
@@ -173,7 +187,6 @@ const AdminDashboard: React.FC = () => {
               <AlertTriangle className="h-8 w-8 text-red-500" />
             </div>
           </div>
-
           <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
             <div className="flex items-center justify-between">
               <div>
@@ -187,7 +200,6 @@ const AdminDashboard: React.FC = () => {
               <TrendingDown className="h-8 w-8 text-orange-500" />
             </div>
           </div>
-
           <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
             <div className="flex items-center justify-between">
               <div>
@@ -201,7 +213,6 @@ const AdminDashboard: React.FC = () => {
               <Droplets className="h-8 w-8 text-green-500" />
             </div>
           </div>
-
           <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
             <div className="flex items-center justify-between">
               <div>
@@ -216,8 +227,6 @@ const AdminDashboard: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* National Average */}
         <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -255,7 +264,8 @@ const AdminDashboard: React.FC = () => {
           {Object.values(stateWaterData).map((state, index) => (
             <div
               key={index}
-              className={`p-4 rounded-lg border ${
+              onClick={() => setSelectedState(state as StateType)}
+              className={`p-4 rounded-lg border transition-all duration-200 cursor-pointer hover:shadow-lg hover:scale-105 ${
                 state.status === "critical"
                   ? "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
                   : state.status === "warning"
@@ -283,7 +293,6 @@ const AdminDashboard: React.FC = () => {
                   {state.status.toUpperCase()}
                 </span>
               </div>
-
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">
@@ -291,7 +300,6 @@ const AdminDashboard: React.FC = () => {
                   </span>
                   <span className="font-medium">{state.waterLevel}%</span>
                 </div>
-
                 <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full transition-all duration-300 ${
@@ -311,6 +319,14 @@ const AdminDashboard: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* UPDATED: Conditionally render the popup if a state is selected */}
+      {selectedState && (
+        <StateDetailsPopup
+          state={selectedState}
+          onClose={() => setSelectedState(null)}
+        />
+      )}
     </div>
   );
 };
