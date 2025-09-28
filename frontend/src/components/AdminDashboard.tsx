@@ -15,6 +15,7 @@ import {
   Waves,
 } from "lucide-react";
 
+
 // UPDATED: Added a type definition for state data
 interface StateType {
   state: string;
@@ -117,7 +118,7 @@ const AdminDashboard: React.FC = () => {
               National Water Crisis Monitoring & Management
             </p>
             <p className="text-orange-200 text-sm mt-1">
-              Comprehensive overview of all states water levels
+              Comprehensive overview of all states' water levels
             </p>
           </div>
           <div className="text-right">
@@ -157,99 +158,99 @@ const AdminDashboard: React.FC = () => {
       {/* National Overview (No changes here) */}
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-            <Droplets className="h-7 w-7 text-water-500" />
-            National Water Crisis Overview
-          </h2>
-          <div className="text-right">
-            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-              {getTrendIcon(nationalOverview.overallTrend)}
-              <span className="capitalize font-medium">
-                {nationalOverview.overallTrend} Trend
-              </span>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                <Droplets className="h-7 w-7 text-water-500" />
+                National Water Crisis Overview
+            </h2>
+            <div className="text-right">
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    {getTrendIcon(nationalOverview.overallTrend)}
+                    <span className="capitalize font-medium">
+                    {nationalOverview.overallTrend} Trend
+                    </span>
+                </div>
+                <p className="text-xs text-gray-400">
+                    Monitoring {nationalOverview.totalStates} states
+                </p>
             </div>
-            <p className="text-xs text-gray-400">
-              Monitoring {nationalOverview.totalStates} states
-            </p>
-          </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-red-600 dark:text-red-400">
-                  Critical States
-                </p>
-                <p className="text-2xl font-bold text-red-700 dark:text-red-300">
-                  {nationalOverview.criticalStates}
-                </p>
-              </div>
-              <AlertTriangle className="h-8 w-8 text-red-500" />
+            <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-sm font-medium text-red-600 dark:text-red-400">
+                        Critical States
+                        </p>
+                        <p className="text-2xl font-bold text-red-700 dark:text-red-300">
+                        {nationalOverview.criticalStates}
+                        </p>
+                    </div>
+                    <AlertTriangle className="h-8 w-8 text-red-500" />
+                </div>
             </div>
-          </div>
-          <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-orange-600 dark:text-orange-400">
-                  Warning States
-                </p>
-                <p className="text-2xl font-bold text-orange-700 dark:text-orange-300">
-                  {nationalOverview.warningStates}
-                </p>
-              </div>
-              <TrendingDown className="h-8 w-8 text-orange-500" />
+            <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-sm font-medium text-orange-600 dark:text-orange-400">
+                        Warning States
+                        </p>
+                        <p className="text-2xl font-bold text-orange-700 dark:text-orange-300">
+                        {nationalOverview.warningStates}
+                        </p>
+                    </div>
+                    <TrendingDown className="h-8 w-8 text-orange-500" />
+                </div>
             </div>
-          </div>
-          <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-green-600 dark:text-green-400">
-                  Normal States
-                </p>
-                <p className="text-2xl font-bold text-green-700 dark:text-green-300">
-                  {nationalOverview.normalStates}
-                </p>
-              </div>
-              <Droplets className="h-8 w-8 text-green-500" />
+            <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-sm font-medium text-green-600 dark:text-green-400">
+                        Normal States
+                        </p>
+                        <p className="text-2xl font-bold text-green-700 dark:text-green-300">
+                        {nationalOverview.normalStates}
+                        </p>
+                    </div>
+                    <Droplets className="h-8 w-8 text-green-500" />
+                </div>
             </div>
-          </div>
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                  Good States
-                </p>
-                <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
-                  {nationalOverview.goodStates}
-                </p>
-              </div>
-              <TrendingUp className="h-8 w-8 text-blue-500" />
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                        Good States
+                        </p>
+                        <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+                        {nationalOverview.goodStates}
+                        </p>
+                    </div>
+                    <TrendingUp className="h-8 w-8 text-blue-500" />
+                </div>
             </div>
-          </div>
         </div>
         <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              National Average Water Level
-            </h3>
-            <span className="text-2xl font-bold text-water-600 dark:text-water-400">
-              {nationalOverview.averageLevel}%
-            </span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3">
-            <div
-              className={`h-3 rounded-full transition-all duration-500 ${
-                nationalOverview.averageLevel < 30
-                  ? "bg-red-500"
-                  : nationalOverview.averageLevel < 50
-                  ? "bg-orange-500"
-                  : nationalOverview.averageLevel < 80
-                  ? "bg-green-500"
-                  : "bg-blue-500"
-              }`}
-              style={{ width: `${nationalOverview.averageLevel}%` }}
-            ></div>
-          </div>
+            <div className="flex items-center justify-between mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                National Average Water Level
+                </h3>
+                <span className="text-2xl font-bold text-water-600 dark:text-water-400">
+                {nationalOverview.averageLevel}%
+                </span>
+            </div>
+            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3">
+                <div
+                    className={`h-3 rounded-full transition-all duration-500 ${
+                        nationalOverview.averageLevel < 30
+                        ? "bg-red-500"
+                        : nationalOverview.averageLevel < 50
+                        ? "bg-orange-500"
+                        : nationalOverview.averageLevel < 80
+                        ? "bg-green-500"
+                        : "bg-blue-500"
+                    }`}
+                    style={{ width: `${nationalOverview.averageLevel}%` }}
+                ></div>
+            </div>
         </div>
       </div>
 
@@ -262,6 +263,7 @@ const AdminDashboard: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Object.values(stateWaterData).map((state, index) => (
+            // UPDATED: Added onClick handler and hover styles to the card
             <div
               key={index}
               onClick={() => setSelectedState(state as StateType)}
