@@ -122,7 +122,7 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Header/Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 dark:from-slate-900 dark:to-slate-800 text-white shadow-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#003867] dark:from-slate-900 dark:to-slate-800 text-white shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
@@ -142,19 +142,19 @@ export const LandingPage: React.FC = () => {
             <nav className="hidden md:flex items-center space-x-4">
               <a
                 href="#features"
-                className="px-3 py-2 hover:text-cyan-400 transition-colors text-sm font-medium"
+                className="px-3 py-2 hover:text-[#00D4FF] transition-colors text-sm font-medium"
               >
                 Features
               </a>
               <a
                 href="#services"
-                className="px-3 py-2 hover:text-cyan-400 transition-colors text-sm font-medium"
+                className="px-3 py-2 hover:text-[#00D4FF] transition-colors text-sm font-medium"
               >
                 Services
               </a>
               <a
                 href="#contact"
-                className="px-3 py-2 hover:text-cyan-400 transition-colors text-sm font-medium"
+                className="px-3 py-2 hover:text-[#00D4FF] transition-colors text-sm font-medium"
               >
                 Contact
               </a>
@@ -163,7 +163,7 @@ export const LandingPage: React.FC = () => {
               </div>
               <button
                 onClick={handleGetStarted}
-                className="bg-cyan-400 hover:bg-cyan-500 text-blue-900 px-6 py-2.5 rounded-full font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="bg-[#00D4FF] hover:bg-[#00BFEB] text-[#003867] px-6 py-2.5 rounded-full font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Get Started
               </button>
@@ -175,7 +175,7 @@ export const LandingPage: React.FC = () => {
               </div>
               <button
                 onClick={handleGetStarted}
-                className="bg-cyan-400 hover:bg-cyan-500 text-blue-900 px-5 py-2 rounded-full font-bold text-sm shadow-lg"
+                className="bg-[#00D4FF] hover:bg-[#00BFEB] text-[#003867] px-5 py-2 rounded-full font-bold text-sm shadow-lg"
               >
                 Get Started
               </button>
@@ -185,7 +185,7 @@ export const LandingPage: React.FC = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-white overflow-hidden">
+      <section className="relative pt-24 pb-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#003867] via-[#004A87] to-[#003867] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-white overflow-hidden">
         {/* Animated background */}
         <div className="absolute inset-0 overflow-hidden opacity-10">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-cyan-400 rounded-full blur-3xl animate-pulse"></div>
@@ -195,8 +195,8 @@ export const LandingPage: React.FC = () => {
         <div className="relative max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-blue-800/40 dark:bg-slate-800/40 backdrop-blur-md px-5 py-2.5 rounded-full border border-cyan-400/30 dark:border-cyan-400/20">
-                <CheckCircle className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+              <div className="inline-flex items-center space-x-2 bg-[#003867]/40 dark:bg-slate-800/40 backdrop-blur-md px-5 py-2.5 rounded-full border border-[#00D4FF]/30 dark:border-cyan-400/20">
+                <CheckCircle className="h-5 w-5 text-[#00D4FF] flex-shrink-0" />
                 <span className="text-sm font-semibold text-white">
                   ISO 9001:2015 & ISO 14001:2015 Certified
                 </span>
@@ -217,14 +217,14 @@ export const LandingPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={handleGetStarted}
-                  className="group bg-cyan-400 hover:bg-cyan-500 text-blue-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-xl hover:shadow-2xl"
+                  className="group bg-[#00D4FF] hover:bg-[#00BFEB] text-[#003867] px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-xl hover:shadow-2xl"
                 >
                   <span>Get Started Now</span>
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <a
                   href="#contact"
-                  className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 text-center shadow-lg hover:shadow-xl"
+                  className="bg-transparent border-2 border-white hover:bg-white hover:text-[#003867] px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 text-center shadow-lg hover:shadow-xl"
                 >
                   Schedule Free Consultation
                 </a>
@@ -238,9 +238,9 @@ export const LandingPage: React.FC = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-white/10 dark:bg-slate-800/50 backdrop-blur-lg p-6 rounded-2xl border border-white/20 dark:border-slate-700/50 hover:border-cyan-400 dark:hover:border-cyan-400 hover:transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                    className="bg-white/10 dark:bg-slate-800/50 backdrop-blur-lg p-6 rounded-2xl border border-white/20 dark:border-slate-700/50 hover:border-[#00D4FF] dark:hover:border-[#00D4FF] hover:transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
                   >
-                    <Icon className="h-8 w-8 text-cyan-400 mb-4" />
+                    <Icon className="h-8 w-8 text-[#00D4FF] mb-4" />
                     <div className="text-3xl font-bold mb-2 text-white">
                       {stat.number}
                     </div>
@@ -292,9 +292,9 @@ export const LandingPage: React.FC = () => {
               return (
                 <div
                   key={index}
-                  className="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-cyan-400 dark:hover:border-cyan-400"
+                  className="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-[#00D4FF] dark:hover:border-[#00D4FF]"
                 >
-                  <div className="bg-gradient-to-br from-blue-500 to-cyan-400 p-3 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform">
+                  <div className="bg-gradient-to-br from-[#003867] to-[#00D4FF] p-3 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform">
                     <Icon className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
@@ -313,7 +313,7 @@ export const LandingPage: React.FC = () => {
       {/* Services Section */}
       <section
         id="services"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-900"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#E6F3FF] to-[#D4F5FF] dark:from-slate-800 dark:to-slate-900"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -335,7 +335,7 @@ export const LandingPage: React.FC = () => {
                   className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 hover:transform hover:scale-105 transition-all duration-300"
                 >
                   <div className="flex items-start space-x-4">
-                    <div className="bg-gradient-to-br from-blue-500 to-cyan-400 p-3 rounded-xl flex-shrink-0">
+                    <div className="bg-gradient-to-br from-[#003867] to-[#00D4FF] p-3 rounded-xl flex-shrink-0">
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -398,7 +398,7 @@ export const LandingPage: React.FC = () => {
                     key={index}
                     className="flex items-start space-x-3 text-gray-700 dark:text-slate-300"
                   >
-                    <CheckCircle className="h-6 w-6 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="h-6 w-6 text-[#00D4FF] flex-shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -411,7 +411,7 @@ export const LandingPage: React.FC = () => {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-slate-800 dark:to-slate-900"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#D4F5FF] to-[#E6F3FF] dark:from-slate-800 dark:to-slate-900"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -454,7 +454,7 @@ export const LandingPage: React.FC = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent dark:bg-slate-700 dark:text-white"
                     placeholder="Enter your phone number"
                   />
                 </div>
@@ -473,14 +473,14 @@ export const LandingPage: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent dark:bg-slate-700 dark:text-white"
                     placeholder="Enter your email"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 transform hover:scale-105"
+                  className="w-full bg-gradient-to-r from-[#00D4FF] to-[#003867] hover:from-[#00BFEB] hover:to-[#002A4D] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 transform hover:scale-105"
                 >
                   Request Free Callback
                 </button>
@@ -501,7 +501,7 @@ export const LandingPage: React.FC = () => {
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-gradient-to-br from-blue-500 to-cyan-400 p-3 rounded-xl">
+                  <div className="bg-gradient-to-br from-[#003867] to-[#00D4FF] p-3 rounded-xl">
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -518,7 +518,7 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-gradient-to-br from-blue-500 to-cyan-400 p-3 rounded-xl">
+                  <div className="bg-gradient-to-br from-[#003867] to-[#00D4FF] p-3 rounded-xl">
                     <Mail className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -532,7 +532,7 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-gradient-to-br from-blue-500 to-cyan-400 p-3 rounded-xl">
+                  <div className="bg-gradient-to-br from-[#003867] to-[#00D4FF] p-3 rounded-xl">
                     <MapPin className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -548,23 +548,23 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 p-6 rounded-xl shadow-lg border-2 border-blue-200 dark:border-cyan-900">
+              <div className="bg-gradient-to-br from-[#E6F3FF] to-[#D4F5FF] dark:from-slate-800 dark:to-slate-700 p-6 rounded-xl shadow-lg border-2 border-[#00D4FF]/30 dark:border-[#00D4FF]/20">
                 <div className="flex items-center space-x-2 mb-3">
-                  <Award className="h-5 w-5 text-blue-600 dark:text-cyan-400" />
+                  <Award className="h-5 w-5 text-[#003867] dark:text-[#00D4FF]" />
                   <h3 className="font-bold text-gray-900 dark:text-white">
                     Certifications
                   </h3>
                 </div>
                 <p className="text-sm text-gray-700 dark:text-slate-300 leading-relaxed">
-                  <span className="font-bold text-blue-600 dark:text-cyan-400">
+                  <span className="font-bold text-[#003867] dark:text-[#00D4FF]">
                     ISO 9001:2015
                   </span>
                   ,{" "}
-                  <span className="font-bold text-blue-600 dark:text-cyan-400">
+                  <span className="font-bold text-[#003867] dark:text-[#00D4FF]">
                     ISO 14001:2015
                   </span>{" "}
                   &{" "}
-                  <span className="font-bold text-blue-600 dark:text-cyan-400">
+                  <span className="font-bold text-[#003867] dark:text-[#00D4FF]">
                     ISO 45001:2018
                   </span>{" "}
                   Certified company ensuring quality, environmental, and safety
@@ -577,13 +577,13 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-blue-900 to-blue-800 dark:from-slate-950 dark:to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-[#003867] dark:from-slate-950 dark:to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* Brand */}
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <Droplets className="h-8 w-8 text-cyan-400" />
+                <Droplets className="h-8 w-8 text-[#00D4FF]" />
                 <div>
                   <h3 className="text-xl font-bold">AquaWatch</h3>
                   <p className="text-sm text-blue-200">
@@ -604,7 +604,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <button
                     onClick={handleGetStarted}
-                    className="text-blue-200 hover:text-cyan-400 transition-colors text-left"
+                    className="text-blue-200 hover:text-[#00D4FF] transition-colors text-left"
                   >
                     Dashboard
                   </button>
@@ -612,7 +612,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <a
                     href="#features"
-                    className="text-blue-200 hover:text-cyan-400 transition-colors"
+                    className="text-blue-200 hover:text-[#00D4FF] transition-colors"
                   >
                     Features
                   </a>
@@ -620,7 +620,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <a
                     href="#services"
-                    className="text-blue-200 hover:text-cyan-400 transition-colors"
+                    className="text-blue-200 hover:text-[#00D4FF] transition-colors"
                   >
                     Services
                   </a>
@@ -628,7 +628,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <a
                     href="#contact"
-                    className="text-blue-200 hover:text-cyan-400 transition-colors"
+                    className="text-blue-200 hover:text-[#00D4FF] transition-colors"
                   >
                     Contact Us
                   </a>
@@ -652,7 +652,7 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t border-blue-700 dark:border-slate-800 pt-8">
+          <div className="border-t border-[#004A87] dark:border-slate-800 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-sm text-blue-200 dark:text-slate-400">
                 © 2025 AquaWatch. All Right Reserved | Developed by AquaWatch
