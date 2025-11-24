@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useAuth } from "../contexts/AuthContext";
+import { LoadingSpinner } from "./LoadingSpinner";
 import { Users, MapPin, Activity, Eye, EyeOff } from "lucide-react";
 
 interface UserInfo {
@@ -114,11 +115,8 @@ export const UserDatabase: React.FC = () => {
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto p-6">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-slate-400">
-            Loading database...
-          </p>
+        <div className="text-center flex items-center justify-center h-64">
+          <LoadingSpinner />
         </div>
       </div>
     );

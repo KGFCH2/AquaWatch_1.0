@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useAuth } from "../contexts/AuthContext";
 import { useWaterData } from "../contexts/WaterDataContext";
 import RealTimeGraph from "./RealTimeGraph";
+import { LoadingSpinner } from "./LoadingSpinner";
 import {
   Droplets,
   AlertTriangle,
@@ -14,7 +15,6 @@ import {
   Activity,
   Info,
   Shield,
-  Waves,
 } from "lucide-react";
 
 interface StateWaterData {
@@ -39,52 +39,6 @@ const UserDashboard: React.FC = () => {
   const [userStateData, setUserStateData] = useState<StateWaterData | null>(
     null
   );
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.1,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { scale: 0.9, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15
-      }
-    },
-    hover: {
-      y: -5,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 17
-      }
-    }
-  };
 
   // Helper function to calculate trend from historical data
   const calculateTrend = (
@@ -523,33 +477,7 @@ const UserDashboard: React.FC = () => {
         animate={{ opacity: 1 }}
         className="flex items-center justify-center h-64"
       >
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-center"
-        >
-          <motion.div
-            animate={{
-              rotate: 360,
-              scale: [1, 1.1, 1]
-            }}
-            transition={{
-              rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-              scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-            }}
-          >
-            <Waves className="h-12 w-12 text-blue-500 dark:text-blue-400 mx-auto mb-4" />
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-gray-500 dark:text-gray-400"
-          >
-            Loading water data...
-          </motion.p>
-        </motion.div>
+        <LoadingSpinner />
       </motion.div>
     );
   }
