@@ -16,7 +16,7 @@ COLLECTION_NAME = "DWLR_state"
 API_KEY = "bfb4498b5acd2ece3dadf3eed5aacfee"
 
 # ---------- Firebase Setup ----------
-cred = credentials.Certificate("aquawatch-42795-firebase-adminsdk-fbsvc-c63652eac0.json")
+cred = credentials.Certificate("aquawatch-30c00-firebase-adminsdk-fbsvc-382838e8af.json")
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
 
