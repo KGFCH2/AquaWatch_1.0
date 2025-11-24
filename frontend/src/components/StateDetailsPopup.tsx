@@ -13,7 +13,8 @@ import {
   Legend,
   Filler,
 } from "chart.js";
-import { X, Loader2 } from "lucide-react";
+import { X } from "lucide-react";
+import { LoadingSpinner } from "./LoadingSpinner";
 import { db } from "../firebase/config";
 import {
   collection,
@@ -225,7 +226,7 @@ const StateDetailsPopup: React.FC<StateDetailsPopupProps> = ({
         <div className="h-64">
           {loading ? (
             <div className="flex items-center justify-center h-full">
-              <Loader2 className="h-10 w-10 text-water-500 animate-spin" />
+              <LoadingSpinner />
             </div>
           ) : historyData.length > 0 ? (
             <Line options={chartOptions} data={chartData} />
