@@ -19,6 +19,7 @@ import { EmergencyModal } from "./components/EmergencyModal";
 import { DataMethodologyModal } from "./components/DataMethodologyModal";
 import { SolutionsPage } from "./pages/SolutionsPage";
 import { AlertsPage } from "./pages/AlertsPage";
+import { LandingPage } from "./pages/LandingPage";
 
 const AppContent: React.FC = () => {
   const { currentUser, isAdmin } = useAuth();
@@ -92,9 +93,20 @@ const AppContent: React.FC = () => {
     return <LoadingScreen />;
   }
 
-  // Show authentication if user is not logged in
+  // Show landing page if user is not logged in and hasn't started auth
   if (!currentUser && !authComplete) {
-    return <Authentication onSuccess={handleAuthSuccess} />;
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/auth"
+            element={<Authentication onSuccess={handleAuthSuccess} />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    );
   }
 
   // Redirect admin users to admin dashboard
