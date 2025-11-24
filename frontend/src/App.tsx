@@ -99,7 +99,10 @@ const AppContent: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/auth" element={<Authentication onSuccess={handleAuthSuccess} />} />
+          <Route
+            path="/auth"
+            element={<Authentication onSuccess={handleAuthSuccess} />}
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

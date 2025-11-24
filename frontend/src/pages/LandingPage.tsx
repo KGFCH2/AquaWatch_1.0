@@ -208,7 +208,10 @@ export const LandingPage: React.FC = () => {
               </h1>
 
               <p className="text-xl text-blue-100 dark:text-slate-300 leading-relaxed max-w-2xl">
-                Advanced Digital Water Level Recorders (DWLR) for precise groundwater monitoring with real-time data collection, telemetry features, and full CGWA compliance. Ideal for environmental management and resource conservation.
+                Advanced Digital Water Level Recorders (DWLR) for precise
+                groundwater monitoring with real-time data collection, telemetry
+                features, and full CGWA compliance. Ideal for environmental
+                management and resource conservation.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -226,7 +229,6 @@ export const LandingPage: React.FC = () => {
                   Schedule Free Consultation
                 </a>
               </div>
-
             </div>
 
             {/* Right side - Stats cards */}
@@ -239,7 +241,9 @@ export const LandingPage: React.FC = () => {
                     className="bg-white/10 dark:bg-slate-800/50 backdrop-blur-lg p-6 rounded-2xl border border-white/20 dark:border-slate-700/50 hover:border-cyan-400 dark:hover:border-cyan-400 hover:transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
                   >
                     <Icon className="h-8 w-8 text-cyan-400 mb-4" />
-                    <div className="text-3xl font-bold mb-2 text-white">{stat.number}</div>
+                    <div className="text-3xl font-bold mb-2 text-white">
+                      {stat.number}
+                    </div>
                     <div className="text-sm text-blue-200 dark:text-slate-300 font-medium leading-snug">
                       {stat.label}
                     </div>
@@ -275,7 +279,10 @@ export const LandingPage: React.FC = () => {
               Revolutionizing Groundwater Monitoring with DWLRs
             </h2>
             <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              In today's data-driven world, efficient groundwater management is crucial. Digital Water Level Recorders (DWLRs) offer a smart, reliable, and real-time solution for tracking water resources across India.
+              In today's data-driven world, efficient groundwater management is
+              crucial. Digital Water Level Recorders (DWLRs) offer a smart,
+              reliable, and real-time solution for tracking water resources
+              across India.
             </p>
           </div>
 
@@ -549,7 +556,19 @@ export const LandingPage: React.FC = () => {
                   </h3>
                 </div>
                 <p className="text-sm text-gray-700 dark:text-slate-300 leading-relaxed">
-                  <span className="font-bold text-blue-600 dark:text-cyan-400">ISO 9001:2015</span>, <span className="font-bold text-blue-600 dark:text-cyan-400">ISO 14001:2015</span> & <span className="font-bold text-blue-600 dark:text-cyan-400">ISO 45001:2018</span> Certified company ensuring quality, environmental, and safety standards.
+                  <span className="font-bold text-blue-600 dark:text-cyan-400">
+                    ISO 9001:2015
+                  </span>
+                  ,{" "}
+                  <span className="font-bold text-blue-600 dark:text-cyan-400">
+                    ISO 14001:2015
+                  </span>{" "}
+                  &{" "}
+                  <span className="font-bold text-blue-600 dark:text-cyan-400">
+                    ISO 45001:2018
+                  </span>{" "}
+                  Certified company ensuring quality, environmental, and safety
+                  standards.
                 </p>
               </div>
             </div>
@@ -573,8 +592,8 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
               <p className="text-blue-200 dark:text-slate-300 text-sm">
-                Regulating and Managing Groundwater Resources for a
-                Water-Secure India.
+                Regulating and Managing Groundwater Resources for a Water-Secure
+                India.
               </p>
             </div>
 
