@@ -27,7 +27,6 @@ export const Header: React.FC<HeaderProps> = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { userData, logout, isAdmin } = useAuth();
-  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: BarChart3, path: "/" },
@@ -61,7 +60,6 @@ export const Header: React.FC<HeaderProps> = ({
   const handleLogout = async () => {
     try {
       await logout();
-      setShowUserMenu(false);
       // Reload the page to reset the app state
       window.location.reload();
     } catch (error) {
@@ -179,11 +177,8 @@ export const Header: React.FC<HeaderProps> = ({
             </nav>
 
             {/* User Menu */}
-            <div className="relative">
-              <button
-                onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blue-800 dark:hover:bg-slate-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              >
+            <div className="relative group">
+              <button className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blue-800 dark:hover:bg-slate-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300">
                 <userInfo.icon
                   className={`h-5 w-5 ${
                     isAdmin ? "text-orange-300" : "text-blue-300"
@@ -197,34 +192,32 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
               </button>
 
-              {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-200 dark:border-slate-700 py-2 z-50">
-                  <div className="px-4 py-3 border-b border-gray-200 dark:border-slate-700">
-                    <div className="flex items-center space-x-3">
-                      <userInfo.icon
-                        className={`h-8 w-8 ${
-                          isAdmin ? "text-orange-500" : "text-blue-500"
-                        }`}
-                      />
-                      <div>
-                        <p className="font-medium text-gray-900 dark:text-white">
-                          {userInfo.name}
-                        </p>
-                        <p className="text-sm text-gray-600 dark:text-slate-400">
-                          {userInfo.subtitle}
-                        </p>
-                      </div>
+              <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-200 dark:border-slate-700 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="px-4 py-3 border-b border-gray-200 dark:border-slate-700">
+                  <div className="flex items-center space-x-3">
+                    <userInfo.icon
+                      className={`h-8 w-8 ${
+                        isAdmin ? "text-orange-500" : "text-blue-500"
+                      }`}
+                    />
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {userInfo.name}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-slate-400">
+                        {userInfo.subtitle}
+                      </p>
                     </div>
                   </div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center space-x-2 px-4 py-2 text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    <span>Sign Out</span>
-                  </button>
                 </div>
-              )}
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center space-x-2 px-4 py-2 text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
             </div>
           </div>
 
