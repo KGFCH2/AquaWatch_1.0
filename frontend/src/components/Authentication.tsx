@@ -15,16 +15,6 @@ export const Authentication: React.FC<AuthenticationProps> = ({
   onSuccess,
 }) => {
   const [currentStep, setCurrentStep] = useState<AuthStep>("role-selection");
-  const { demoLogin } = useAuth();
-
-  const handleDemoLogin = async () => {
-    try {
-      await demoLogin();
-      onSuccess();
-    } catch (error) {
-      console.error("Demo login failed:", error);
-    }
-  };
 
   const handleRoleSelection = (role: "user" | "admin") => {
     if (role === "user") {
@@ -49,12 +39,7 @@ export const Authentication: React.FC<AuthenticationProps> = ({
   const renderCurrentStep = () => {
     switch (currentStep) {
       case "role-selection":
-        return (
-          <RoleSelection
-            onSelectRole={handleRoleSelection}
-            onDemoLogin={handleDemoLogin}
-          />
-        );
+        return <RoleSelection onSelectRole={handleRoleSelection} />;
 
       case "user-login":
         return (
@@ -77,12 +62,7 @@ export const Authentication: React.FC<AuthenticationProps> = ({
         );
 
       default:
-        return (
-          <RoleSelection
-            onSelectRole={handleRoleSelection}
-            onDemoLogin={handleDemoLogin}
-          />
-        );
+        return <RoleSelection onSelectRole={handleRoleSelection} />;
     }
   };
 

@@ -46,46 +46,54 @@ export const UserLogin: React.FC<UserLoginProps> = ({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-water-100 dark:from-slate-900 dark:to-blue-950 px-4">
-      <div className="max-w-md w-full">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 p-8 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 px-4 py-12 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-96 h-96 -top-48 -left-48 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div
+          className="absolute w-96 h-96 -bottom-48 -right-48 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+      </div>
+
+      <div className="max-w-md w-full relative z-10">
+        <div className="bg-slate-800/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-700/50 p-8 relative">
           <button
             onClick={onBack}
-            className="absolute top-4 left-4 p-2 text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 transition-colors"
+            className="absolute top-6 left-6 p-2 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition-all duration-300"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
 
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-4">
-              <div className="p-3 bg-water-500 rounded-full">
-                <Droplets className="h-8 w-8 text-white" />
+          <div className="text-center mb-8 pt-4">
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-xl opacity-50"></div>
+                <div className="relative p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl">
+                  <Droplets className="h-8 w-8 text-white" />
+                </div>
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Welcome Back
-            </h1>
-            <p className="text-gray-600 dark:text-slate-300">
-              Sign in to your AquaWatch account
-            </p>
+            <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
+            <p className="text-slate-400">Sign in to access your dashboard</p>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-              <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-xl backdrop-blur-sm">
+              <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2"
+                className="block text-sm font-medium text-slate-300 mb-2"
               >
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-slate-500" />
+              <div className="relative group">
+                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
                 <input
                   id="email"
                   name="email"
@@ -93,8 +101,8 @@ export const UserLogin: React.FC<UserLoginProps> = ({
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-water-500 focus:border-water-500 dark:bg-slate-700 dark:text-white bg-white"
-                  placeholder="Enter your email"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-900/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-slate-500 transition-all duration-300"
+                  placeholder="you@example.com"
                 />
               </div>
             </div>
@@ -102,12 +110,12 @@ export const UserLogin: React.FC<UserLoginProps> = ({
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2"
+                className="block text-sm font-medium text-slate-300 mb-2"
               >
                 Password
               </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-slate-500" />
+              <div className="relative group">
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
                 <input
                   id="password"
                   name="password"
@@ -115,13 +123,13 @@ export const UserLogin: React.FC<UserLoginProps> = ({
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-water-500 focus:border-water-500 dark:bg-slate-700 dark:text-white bg-white"
+                  className="w-full pl-12 pr-12 py-3.5 bg-slate-900/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-slate-500 transition-all duration-300"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -135,23 +143,36 @@ export const UserLogin: React.FC<UserLoginProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-water-600 hover:bg-water-700 disabled:bg-water-400 text-white font-medium py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-water-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 disabled:from-blue-400 disabled:to-cyan-400 text-white font-semibold py-3.5 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-500/50 disabled:shadow-none"
             >
-              {loading ? "Signing In..." : "Sign In"}
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Signing In...
+                </div>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-slate-400">
+            <p className="text-sm text-slate-400">
               Don't have an account?{" "}
               <button
                 onClick={onSignup}
-                className="text-water-600 dark:text-water-400 hover:text-water-700 dark:hover:text-water-300 font-medium"
+                className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
               >
                 Create one now
               </button>
             </p>
           </div>
+        </div>
+
+        <div className="mt-6 text-center">
+          <p className="text-xs text-slate-500">
+            Protected by industry-standard encryption
+          </p>
         </div>
       </div>
     </div>
