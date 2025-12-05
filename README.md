@@ -380,6 +380,18 @@ The backend performs multiple quality checks:
 
 ---
 
+## 📊 Data Analytics
+
+### Key Metrics Tracked
+
+- 📈 **Water Level Trends**: Historical data analysis
+- 🔴 **Crisis Index**: Real-time crisis status per state
+- 👥 **User Engagement**: Active users per state
+- 📍 **Regional Analysis**: State-wise comparisons
+- ⏰ **Temporal Patterns**: Seasonal water variations
+
+---
+
 ## ⚙️ Configuration & Setup
 
 ### 🔥 Firebase Configuration
@@ -470,32 +482,12 @@ service cloud.firestore {
 
 ---
 
-## 🤝 Contributing  
-
-We welcome contributions to improve **AquaWatch**!  
-
-1. 🍴 **Fork** the repository  
-2. 🌿 **Create** your feature branch (`git checkout -b feature/AmazingFeature`)  
-3. 💾 **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)  
-4. 📤 **Push** to the branch (`git push origin feature/AmazingFeature`)  
-5. 🔀 **Open a Pull Request**  
-
-Please ensure your code follows the existing style guidelines and is well-documented.
-
-### Development Guidelines
-- Follow TypeScript strict mode
-- Write unit tests for new features
-- Ensure Firebase security rules are updated
-- Update README for significant changes  
-
----
-
 ## 🆘 Support  
 
 If you encounter any issues or bugs, please:  
 
 - 📌 Check the [Issues](https://github.com/KGFCH2/AquaWatch_1.0/issues) page to see if it's already reported  
-- 📝 If not, create a **new issue** with:  
+  - 📝 If not, create a **new issue** with:  
   - 🖥️ Your OS and environment details  
   - ⚠️ Error messages/logs  
   - 📷 Screenshots (if applicable)  
@@ -543,18 +535,6 @@ curl -X POST "http://localhost:8000/sync?api_key=YOUR_API_KEY"
 
 ---
 
-## 📊 Data Analytics
-
-### Key Metrics Tracked
-
-- 📈 **Water Level Trends**: Historical data analysis
-- 🔴 **Crisis Index**: Real-time crisis status per state
-- 👥 **User Engagement**: Active users per state
-- 📍 **Regional Analysis**: State-wise comparisons
-- ⏰ **Temporal Patterns**: Seasonal water variations
-
----
-
 ## 🌍 Impact  
 
 ### Our Mission
@@ -583,6 +563,52 @@ AquaWatch contributes to multiple UN SDGs:
 - 🎯 **SDG 6**: Clean Water and Sanitation
 - 🎯 **SDG 13**: Climate Action
 - 🎯 **SDG 15**: Life on Land
+
+---
+
+## 🤝 Contributing to AquaWatch
+
+We welcome contributions from developers, data scientists, designers, and water experts!
+
+### How to Contribute
+
+1. 🍴 **Fork** the repository
+2. 🌿 **Create** a feature branch: `git checkout -b feature/YourFeature`
+3. 💻 **Make** your changes with clear, documented code
+4. ✅ **Test** your changes locally
+5. 📝 **Commit** with meaningful messages: `git commit -m 'Add YourFeature'`
+6. 📤 **Push** to branch: `git push origin feature/YourFeature`
+7. 🔀 **Create** a Pull Request
+
+### Development Guidelines
+- ✔️ Follow TypeScript strict mode
+- ✔️ Add unit tests for new features
+- ✔️ Update documentation in README
+- ✔️ Maintain code consistency with ESLint
+- ✔️ Write meaningful commit messages
+- ✔️ Ensure Firebase security rules are updated
+
+### Areas We Need Help With
+- 🎨 **UI/UX Design**: Improve dashboard aesthetics
+- 📱 **Mobile Optimization**: Better mobile responsiveness
+- 🌐 **Internationalization**: Support regional languages
+- 📊 **Data Visualization**: Enhanced charts and maps
+- 🧪 **Testing**: Unit & integration tests
+- 📚 **Documentation**: API docs, user guides
+- 🐍 **Backend Features**: Advanced analytics, ML predictions
+
+---
+
+## 📞 Contact & Links
+
+| Resource | Link |
+|----------|------|
+| 🐙 **GitHub Repository** | [KGFCH2/AquaWatch_1.0](https://github.com/KGFCH2/AquaWatch_1.0) |
+| 👨🏼‍💻 **Creator** | [Babin Bid](https://github.com/KGFCH2) |
+| 🧑🏻‍🤝‍🧑🏼 **Contributors** | [Atanu Saha](https://github.com/Atanu2k4) & [Rohit Kumar Adak](https://github.com/rka2005) |
+| 🌐 **Project Website** | [AquaWatch](https://aquawatch-v1.vercel.app/) |
+| 📚 **CGWB Portal** | [cgwb.gov.in](https://cgwb.gov.in) |
+| 📚 **Ministry of Jal Shakti** | [jalsakhti.gov.in](https://jalshakti.gov.in/) |
 
 ---
 
@@ -631,52 +657,6 @@ The AquaWatch project is licensed under the **MIT License**, a permissive open-s
 - This licensing information applies to all components of the AquaWatch project, including frontend, backend, and associated data files.
 
 For the complete legal text, refer to the [LICENSE](LICENSE) file.
-
----
-
-## 🤝 Contributing to AquaWatch
-
-We welcome contributions from developers, data scientists, designers, and water experts!
-
-### How to Contribute
-
-1. 🍴 **Fork** the repository
-2. 🌿 **Create** a feature branch: `git checkout -b feature/YourFeature`
-3. 💻 **Make** your changes with clear, documented code
-4. ✅ **Test** your changes locally
-5. 📝 **Commit** with meaningful messages: `git commit -m 'Add YourFeature'`
-6. 📤 **Push** to branch: `git push origin feature/YourFeature`
-7. 🔀 **Create** a Pull Request
-
-### Development Guidelines
-- ✔️ Follow TypeScript strict mode
-- ✔️ Add unit tests for new features
-- ✔️ Update documentation in README
-- ✔️ Maintain code consistency with ESLint
-- ✔️ Write meaningful commit messages
-- ✔️ Ensure Firebase security rules are updated
-
-### Areas We Need Help With
-- 🎨 **UI/UX Design**: Improve dashboard aesthetics
-- 📱 **Mobile Optimization**: Better mobile responsiveness
-- 🌐 **Internationalization**: Support regional languages
-- 📊 **Data Visualization**: Enhanced charts and maps
-- 🧪 **Testing**: Unit & integration tests
-- 📚 **Documentation**: API docs, user guides
-- 🐍 **Backend Features**: Advanced analytics, ML predictions
-
----
-
-## 📞 Contact & Links
-
-| Resource | Link |
-|----------|------|
-| 🐙 **GitHub Repository** | [KGFCH2/AquaWatch_1.0](https://github.com/KGFCH2/AquaWatch_1.0) |
-| 👤 **Creator** | [Babin Bid](https://github.com/KGFCH2) |
-| 📧 **Contributors** | [Atanu Saha](https://github.com/Atanu2k4) & [Rohit Kumar Adak](https://github.com/rka2005) |
-| 🌐 **Project Website** | [AquaWatch](https://aquawatch-v1.vercel.app/) |
-| 📚 **CGWB Portal** | [cgwb.gov.in](https://cgwb.gov.in) |
-| 📚 **Ministry of Jal Shakti** | [jalsakhti.gov.in](https://jalshakti.gov.in/) |
 
 ---
 
