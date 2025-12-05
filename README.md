@@ -286,7 +286,7 @@ The backend processes DWLR CSV data and syncs with Firebase. It's **optional** f
 
 ## 🏗️ Application Architecture  
 
-![AquaWatch Architecture Diagram](Flow_chart.png)
+![AquaWatch Architecture Diagram](aquawatch_architecture.png)
 
 ---
 
