@@ -292,7 +292,6 @@ The backend processes DWLR CSV data and syncs with Firebase. It's **optional** f
 
 ## 🖼️ Flowchart
 
-<<<<<<< HEAD
 ![AquaWatch Flowchart](Flow_chart.png)
 
 ## 📊 Data Sources & DWLR Dataset
@@ -368,13 +367,6 @@ The backend performs multiple quality checks:
 - ✅ **Range Check**: Confirms water levels are within realistic bounds (0-50m bgl)
 - ✅ **Deduplication**: Prevents duplicate entries in Firebase
 - ✅ **Incremental Updates**: Only syncs new/modified rows  
-=======
-- 🌍 **Government Databases**: CGWB  
-- ⛏️ **DWLR Sensors**: Digital Water Level Recorder
-- 📡 **IoT Monitoring**: Real-time sensors  
-- 🔥 **Firebase**: Real-time sync  
-- 📂 **CSV Processing**: Automated updates  
->>>>>>> 75cd7c403a7a14d2e6a46f6bae7b3c07df199077
 
 ---
 
