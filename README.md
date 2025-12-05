@@ -14,7 +14,7 @@ The platform offers **critical insights** into groundwater depletion, water avai
 
 ## 🏗️ Application Architecture  
 
-### System Architecture Overview
+### System Architecture Overview 🖼️
 AquaWatch operates through 4 integrated phases:
 
 **PHASE 1: DATA ACQUISITION** → 5,260+ DWLR Sensors (CGWB Data)  
@@ -442,7 +442,9 @@ COLLECTION_NAME=DWLR_state
 API_KEY=your-secure-api-key
 ```
 
-**Security note:** Do not store actual API keys, service account JSON, or other secrets in `README.md`. Keep secrets in environment files (listed in `.gitignore`) or a secure secrets manager, and document only the variable names and how to set them.
+### 🔒 Security Note
+
+Do not store actual API keys, service account JSON, or other secrets in `README.md`. Keep secrets in environment files (listed in `.gitignore`) or a secure secrets manager, and document only the variable names and how to set them.
 
 ### 🔒 Firebase Security Rules
 
@@ -636,7 +638,9 @@ We welcome contributions from developers, data scientists, designers, and water 
 | 📚 **CGWB Portal** | [cgwb.gov.in](https://cgwb.gov.in) |
 | 📚 **Ministry of Jal Shakti** | [jalsakhti.gov.in](https://jalshakti.gov.in/) |
 
-## Acknowledgments
+---
+
+## 🙏 Acknowledgments 
 
 - 🏛️ **Central Ground Water Board (CGWB)** - For DWLR dataset and resources
 - 🇮🇳 **Ministry of Jal Shakti** - Policy and guidance
@@ -655,8 +659,6 @@ We welcome contributions from developers, data scientists, designers, and water 
 
 ---
 
-<img src="https://img.shields.io/badge/Made%20with-❤️-red" /> 
-
 Made with ❤️ for India's sustainable water future
 
 🕒 **Last Updated**: December 6, 2025 | 📌 **Version**: 1.0.0 | 📍 **Status**: Active Development
@@ -667,7 +669,4 @@ Made with ❤️ for India's sustainable water future
 
 </div>
 
-
-
-
-
+---
