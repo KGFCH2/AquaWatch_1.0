@@ -645,15 +645,6 @@ We welcome contributions from developers, data scientists, designers, and water 
 
 ---
 
-## 📈 Project Statistics
-
-- ⭐ **Stars**: [Watch this repo!](https://github.com/KGFCH2/AquaWatch_1.0)
-- 🐛 **Issues**: [Report bugs here](https://github.com/KGFCH2/AquaWatch_1.0/issues)
-- 📝 **Discussions**: [Community forum](https://github.com/KGFCH2/AquaWatch_1.0/discussions)
-- 📦 **Releases**: [Check releases](https://github.com/KGFCH2/AquaWatch_1.0/releases)
-
----
-
 <div align="center">
 
 ### 🔵 Built for India's Water Security 🇮🇳
