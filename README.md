@@ -630,11 +630,11 @@ We welcome contributions from developers, data scientists, designers, and water 
 | Resource | Link |
 |----------|------|
 | 🐙 **GitHub Repository** | [KGFCH2/AquaWatch_1.0](https://github.com/KGFCH2/AquaWatch_1.0) |
-| 👤 **Creator** | [@KGFCH2](https://github.com/KGFCH2) |
-| 📧 **Email** | contact@aquawatch.org |
-| 🌐 **Project Website** | [aquawatch.org](https://aquawatch.org) |
+| 👤 **Creator** | [Babin Bid](https://github.com/KGFCH2) |
+| 📧 **Contributors** | [Atanu Saha](https://github.com/Atanu2k4) & [Rohit Kumar Adak](https://github.com/rka2005) |
+| 🌐 **Project Website** | [AquaWatch](https://aquawatch-v1.vercel.app/) |
 | 📚 **CGWB Portal** | [cgwb.gov.in](https://cgwb.gov.in) |
-| 📚 **Ministry of Jal Shakti** | [jalsakhti.gov.in](https://jalsakhti.gov.in) |
+| 📚 **Ministry of Jal Shakti** | [jalsakhti.gov.in](https://jalshakti.gov.in/) |
 
 ### Acknowledgments
 
