@@ -211,10 +211,9 @@ Before you begin, ensure you have:
 
 3. **Configure Firebase** (Optional - for backend API)
    
-   Place your Firebase service account key in `backend/`:
-   ```
-   backend/aquawatch-30c00-firebase-adminsdk-fbsvc-382838e8af.json
-   ```
+   Place your Firebase service account JSON key file in `backend/`. **Do not commit the key file or paste its contents into this README.**
+   Use a descriptive filename (for example, `serviceAccountKey.json`) and set its path via the backend `.env` variable `FIREBASE_CREDENTIALS_PATH`.
+   Ensure the key file is listed in `.gitignore`.
 
 ### ▶️ Development
 
@@ -433,7 +432,8 @@ VITE_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
 CSV_FILE=data/dwlr_india.csv
 
 # Firebase Credentials
-FIREBASE_CREDENTIALS_PATH=aquawatch-30c00-firebase-adminsdk-fbsvc-382838e8af.json
+# Set this to the relative path of your service account JSON file (do NOT commit this file):
+FIREBASE_CREDENTIALS_PATH=path/to/serviceAccountKey.json
 
 # Firestore
 COLLECTION_NAME=DWLR_state
@@ -441,6 +441,8 @@ COLLECTION_NAME=DWLR_state
 # API Security
 API_KEY=your-secure-api-key
 ```
+
+**Security note:** Do not store actual API keys, service account JSON, or other secrets in `README.md`. Keep secrets in environment files (listed in `.gitignore`) or a secure secrets manager, and document only the variable names and how to set them.
 
 ### 🔒 Firebase Security Rules
 
