@@ -158,14 +158,14 @@ The platform offers **critical insights** into groundwater depletion, water avai
 
 ## 🏗️ Application Architecture  
 
-![AquaWatch Architecture Diagram](aquawatch_architecture.png)
+![AquaWatch Architecture Diagram](Flow_chart.png)
 
 ---
 
 ## 📊 Data Sources  
 
 - 🌍 **Government Databases**: CGWB  
-- ⛏️ **DWLR Sensors**: Deep Water Level Recorders  
+- ⛏️ **DWLR Sensors**: Digital Water Level Recorder
 - 📡 **IoT Monitoring**: Real-time sensors  
 - 🔥 **Firebase**: Real-time sync  
 - 📂 **CSV Processing**: Automated updates  
