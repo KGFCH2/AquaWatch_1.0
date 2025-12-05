@@ -586,11 +586,51 @@ AquaWatch contributes to multiple UN SDGs:
 
 ---
 
-## 📜 License
+# 🌊 AquaWatch Project Licensing
 
-This project is licensed under the **MIT License** - see the LICENSE file for details.
+## 📜 Overall License
 
-Permission is hereby granted to use, copy, modify, and distribute this software for any purpose.
+The AquaWatch project is licensed under the **MIT License**, a permissive open-source license that allows for broad use, modification, and distribution of the software. The full text of the MIT License is available in the [LICENSE](LICENSE) file at the root of this repository.
+
+### 🔑 Key Points of the MIT License
+
+- **Copyright (c) 2025 AquaWatch**: All rights are reserved by the copyright holder.
+- **Permission Granted**: Free use, copying, modification, merging, publishing, distribution, sublicensing, and selling of the software is permitted without restriction.
+- **Condition**: The copyright notice and permission notice must be included in all copies or substantial portions of the Software.
+- **Disclaimer**: The software is provided "AS IS" without warranty of any kind.
+
+## ⚠️ Crucial Aspects
+
+1. **🌍 Open-Source Nature**: AquaWatch is committed to open-source principles, promoting transparency, collaboration, and community-driven development.
+2. **🔓 Permissive Licensing**: The MIT License allows commercial use, private modifications, and redistribution, making it suitable for integration into various applications and services.
+3. **🤝 Community Contributions**: Contributors must agree to license their contributions under the same MIT License.
+4. **📝 Attribution**: Proper attribution to the original authors and the AquaWatch project is essential for maintaining credit and legal compliance.
+
+## ✅ Do's and ❌ Don'ts for the AquaWatch Project
+
+### ✅ Do's
+- **🆓 Use Freely**: Utilize the software in personal, academic, or commercial projects without seeking permission.
+- **🔧 Modify and Distribute**: Make changes to the code and share your modifications with others.
+- **💡 Contribute**: Submit pull requests, bug reports, and feature requests to improve the project.
+- **📋 Include Copyright Notice**: Always include the MIT License text and copyright notice when distributing copies of the software.
+- **🔗 Combine with Other Software**: Integrate AquaWatch components into larger systems or applications.
+- **💬 Provide Feedback**: Report issues, suggest improvements, and participate in discussions.
+
+### ❌ Don'ts
+- **🚫 Remove Copyright Notice**: Do not delete or alter the copyright notice or license text from any distributed copies.
+- **🚫 Claim Ownership**: Do not claim exclusive rights or ownership over the software or its derivatives.
+- **🚫 Misrepresent Origin**: Avoid presenting modified versions as the original AquaWatch software without clear indication of changes.
+- **🚫 Violate Laws**: Do not use the software for illegal purposes or in ways that infringe on other copyrights or trademarks.
+- **🚫 Expect Warranty**: Do not rely on implied warranties; the software is provided without guarantees.
+- **🚫 Ignore Community Guidelines**: Refrain from submitting contributions that violate the project's code of conduct or contribution guidelines.
+
+## 📌 Additional Notes
+
+- For commercial use, while the MIT License allows it, consider contributing back improvements or acknowledging the project in your products.
+- If you have questions about licensing or contributions, please open an issue in the repository or contact the maintainers.
+- This licensing information applies to all components of the AquaWatch project, including frontend, backend, and associated data files.
+
+For the complete legal text, refer to the [LICENSE](LICENSE) file.
 
 ---
 
