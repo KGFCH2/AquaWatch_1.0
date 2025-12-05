@@ -636,7 +636,7 @@ We welcome contributions from developers, data scientists, designers, and water 
 | 📚 **CGWB Portal** | [cgwb.gov.in](https://cgwb.gov.in) |
 | 📚 **Ministry of Jal Shakti** | [jalsakhti.gov.in](https://jalshakti.gov.in/) |
 
-### Acknowledgments
+## Acknowledgments
 
 - 🏛️ **Central Ground Water Board (CGWB)** - For DWLR dataset and resources
 - 🇮🇳 **Ministry of Jal Shakti** - Policy and guidance
