@@ -691,7 +691,7 @@ We welcome contributions from developers, data scientists, designers, and water 
 
 <div align="center">
 
-### 🔵 Built for India's Water Security 🇮🇳
+### 🔵 Built for India's Water Security 🇮🇳 🔵
 
 **💧 _Monitoring Groundwater. Managing Crisis. Empowering Communities._ 💧**
 
