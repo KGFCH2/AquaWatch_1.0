@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Go to AquaWatch home page"
           >
             <img
-              src="/t2-removebg-preview.png"
+              src="/aquawatch.png"
               alt="AquaWatch Logo"
               className="h-10 w-9 object-cover"
             />

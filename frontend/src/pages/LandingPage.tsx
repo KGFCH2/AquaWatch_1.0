@@ -127,7 +127,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
               <img
-                src="/t2-removebg-preview.png"
+                src="/aquawatch.png"
                 alt="AquaWatch Logo"
                 className="h-10 w-9 object-cover"
               />
