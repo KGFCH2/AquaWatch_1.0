@@ -5,12 +5,13 @@ from datetime import date
 from contextlib import asynccontextmanager
 import math
 import time
-
 import pandas as pd
 import uvicorn
 from fastapi import FastAPI, Depends, HTTPException
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
+from dotenv import load_dotenv
+load_dotenv()
 
 # Firebase
 import firebase_admin
@@ -25,9 +26,9 @@ COLLECTION_NAME = "DWLR_state"   # Firestore collection (per state sub-collectio
 API_KEY = "bfb4498b5acd2ece3dadf3eed5aacfee"
 
 # MongoDB config (Data Warehouse)
-MONGO_URI = "mongodb+srv://aquawatch:AquaWatch%402025@cluster0.gbzbbrn.mongodb.net/?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
-MONGO_DB_NAME = "aquawatch"
-MONGO_COLLECTION_NAME = "states"   # one document per state, with data array
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "aquawatch")
+MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME", "states")   # one document per state, with data array
 MONGO_STATE_FIELD_LIMIT = None     # we don't delete anything in MongoDB
 
 FIREBASE_STATE_LIMIT = 200         # keep only latest 200 records per state in Firestore
@@ -42,6 +43,8 @@ db = firestore.client()
 
 # ---------- MongoDB Setup ----------
 try:
+    if not MONGO_URI:
+        raise ValueError("MONGO_URI not set")
     mongo_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
     mongo_db = mongo_client[MONGO_DB_NAME]
     mongo_states_col = mongo_db[MONGO_COLLECTION_NAME]
