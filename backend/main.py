@@ -18,7 +18,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 # MongoDB
-from pymongo import MongoClient
+from pymongo import MongoClient, UpdateOne
 
 # ---------- Config ----------
 CSV_FILE = "data/groundwater.csv"
@@ -200,28 +200,41 @@ def sync_new_data():
 
         # MongoDB: same new rows (if connected)
         if mongo_states_col is not None:
-            mongo_batch_size = 500
+            mongo_batch_size = 1000
+            total_mongo_written = 0
+
             for batch_start in range(0, len(valid_records), mongo_batch_size):
                 batch_end = min(batch_start + mongo_batch_size, len(valid_records))
+                state_buffer = {}
+
+                # Group docs by state
                 for i, row in enumerate(valid_records[batch_start:batch_end],
                                         start=last_index + 1 + batch_start):
-                    original_state = str(row[state_column]).strip()
-                    state_id = original_state.replace(".", "_") or "Unknown"
+                    state_id = str(row[state_column]).strip().replace(".", "_") or "Unknown"
                     mongo_doc = {
-                        "state": original_state,
                         "date": row.get("Date"),
                         "time": row.get("Time"),
                         "water_level_m_bgl": row.get("Water_Level_m_bgl"),
                         "csv_index": i
                     }
+                    state_buffer.setdefault(state_id, []).append(mongo_doc)
+
+                # Prepare bulk operations: push arrays per state with upsert
+                ops = []
+                for state_id, docs in state_buffer.items():
+                    ops.append(UpdateOne(
+                        {"_id": state_id},
+                        {"$push": {"data": {"$each": docs}}},
+                        upsert=True
+                    ))
+
+                if ops:
                     try:
-                        mongo_states_col.update_one(
-                            {"_id": state_id},
-                            {"$push": {"data": mongo_doc}},
-                            upsert=True
-                        )
+                        result = mongo_states_col.bulk_write(ops, ordered=False)
+                        total_mongo_written += (result.modified_count + result.upserted_count)
+                        print(f"📦 MongoDB bulk write: modified={result.modified_count}, upserts={len(result.upserted_ids or {})}")
                     except Exception as e:
-                        print(f"⚠️ MongoDB insert error for {state_id}: {e}")
+                        print(f"❌ MongoDB bulk_write error: {e}")
         else:
             print("⚠️ MongoDB not connected. Skipping MongoDB uploads.")
 
@@ -314,6 +327,15 @@ def get_state_data(state: str, api_key: str, valid: bool = Depends(verify_api_ke
 @app.post("/sync")
 def manual_sync(api_key: str, valid: bool = Depends(verify_api_key)):
     return sync_new_data()
+
+
+@app.get("/mongo-state")
+def mongo_state(state: str, api_key: str, valid: bool = Depends(verify_api_key)):
+    if mongo_states_col is None:
+        return {"error": "MongoDB not connected"}
+    state_id = state.replace(".", "_")
+    doc = mongo_states_col.find_one({"_id": state_id}, {"data": {"$slice": -5}})
+    return {"state": state, "last5": doc.get("data", []) if doc else []}
 
 
 # ---------- Run ----------
