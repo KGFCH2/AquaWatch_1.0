@@ -5,6 +5,8 @@ from datetime import date
 from contextlib import asynccontextmanager
 import math
 import time
+import random
+import asyncio
 import pandas as pd
 import uvicorn
 from fastapi import FastAPI, Depends, HTTPException
@@ -17,13 +19,15 @@ load_dotenv()
 import firebase_admin
 from firebase_admin import credentials, firestore
 
+from google.api_core.exceptions import ResourceExhausted, DeadlineExceeded, ServiceUnavailable
+
 # MongoDB
 from pymongo import MongoClient, UpdateOne
 
 # ---------- Config ----------
 CSV_FILE = "data/groundwater.csv"
 COLLECTION_NAME = "DWLR_state"   # Firestore collection (per state sub-collections)
-API_KEY = "bfb4498b5acd2ece3dadf3eed5aacfee"
+API_KEY = "bfb4498b5acd2ece3dadf3eed5aacfee"    # Govt. api key of DWLR
 
 # MongoDB config (Data Warehouse)
 MONGO_URI = os.getenv("MONGO_URI")
@@ -35,7 +39,7 @@ FIREBASE_STATE_LIMIT = 200         # keep only latest 200 records per state in F
 
 
 # ---------- Firebase Setup ----------
-cred = credentials.Certificate("aquawatch-30c00-firebase-adminsdk-fbsvc-382838e8af.json")
+cred = credentials.Certificate("auawatch-firebase-adminsdk-fbsvc-7af81c7aea.json")
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
 
@@ -94,24 +98,23 @@ def verify_api_key(api_key: str):
 
 # ---------- Filter to keep only latest 200 records per state ----------
 def filter_latest_per_state(valid_records, limit=FIREBASE_STATE_LIMIT):
-    """Filter records to keep only the latest 'limit' records per state."""
-    state_records = {}
-    
-    # Group records by state
-    for i, row in enumerate(valid_records):
-        state = str(row.get("State", "Unknown")).strip()
-        if state not in state_records:
-            state_records[state] = []
-        state_records[state].append((i, row))
-    
-    # Keep only the latest 'limit' records per state
-    filtered = []
-    for state, records in state_records.items():
-        # Keep the last 'limit' records (most recent)
-        latest_records = records[-limit:] if len(records) > limit else records
-        filtered.extend(latest_records)
-    
-    return filtered
+    """
+    Keep only latest `limit` records per state BEFORE Firestore upload.
+    This prevents quota exhaustion.
+    """
+    by_state = {}
+
+    for row in valid_records:
+        state = str(row.get("State", "Unknown")).strip() or "Unknown"
+        by_state.setdefault(state, []).append(row)
+
+    final_records = []
+    for state, rows in by_state.items():
+        # assume CSV is append-only → last rows are latest
+        final_records.extend(rows[-limit:])
+
+    return final_records
+
 
 
 def enforce_firestore_state_limit(states_touched, limit=FIREBASE_STATE_LIMIT):
@@ -122,12 +125,17 @@ def enforce_firestore_state_limit(states_touched, limit=FIREBASE_STATE_LIMIT):
         state_data_col = db.collection(COLLECTION_NAME).document(state_id).collection("data")
         docs = list(state_data_col.stream())
 
-        # Sort by numeric doc id (csv index) so we can remove oldest locally
-        try:
-            sorted_docs = sorted(docs, key=lambda d: int(d.id))
-        except ValueError:
-            # Fallback: leave order as-is if any id is non-numeric
-            sorted_docs = docs
+        # Prefer csv_index field when present; fallback to numeric document id.
+        def _sort_key(d):
+            data = d.to_dict() or {}
+            if "csv_index" in data and data["csv_index"] is not None:
+                return int(data["csv_index"])
+            try:
+                return int(d.id)
+            except ValueError:
+                return 0
+
+        sorted_docs = sorted(docs, key=_sort_key)
 
         extra = len(sorted_docs) - limit
         if extra <= 0:
@@ -139,15 +147,31 @@ def enforce_firestore_state_limit(states_touched, limit=FIREBASE_STATE_LIMIT):
             batch.delete(d.reference)
             count += 1
             if count % 400 == 0:
-                batch.commit()
+                _firestore_commit_with_retry(batch)
                 batch = db.batch()
         if count % 400 != 0:
-            batch.commit()
+            _firestore_commit_with_retry(batch)
 
         print(f"🧹 Deleted {count} old records for {state_id}; capped at {limit}.")
 
 
 # ---------- Sync Logic ----------
+def _firestore_commit_with_retry(batch, *, max_retries: int = 6, base_delay_s: float = 1.0, max_delay_s: float = 30.0):
+    """
+    Retry Firestore batch.commit() on transient/quota errors with exponential backoff + jitter.
+    """
+    for attempt in range(max_retries + 1):
+        try:
+            return batch.commit()
+        except (ResourceExhausted, DeadlineExceeded, ServiceUnavailable) as e:
+            if attempt >= max_retries:
+                raise
+            delay = min(max_delay_s, base_delay_s * (2 ** attempt))
+            delay = delay * (0.5 + random.random())  # jitter
+            print(f"⚠️ Firestore commit failed ({e.__class__.__name__}). Retrying in {delay:.1f}s ({attempt+1}/{max_retries})")
+            time.sleep(delay)
+
+
 def sync_new_data():
     # Load CSV with small retry to avoid EmptyDataError during writes
     attempts = 3
@@ -172,6 +196,10 @@ def sync_new_data():
         new_records = records[last_index + 1:]
         valid_records = [normalize_row(r) for r in new_records if is_valid_row(r)]
 
+        # 🔐 HARD LIMIT for Firestore (per state)
+        valid_records = filter_latest_per_state(valid_records, FIREBASE_STATE_LIMIT)
+
+
         if not valid_records:
             meta_ref.set({"old_last_index": last_index, "last_index": total_rows - 1})
             print("⚡ No valid new data to upload.")
@@ -190,12 +218,23 @@ def sync_new_data():
                 original_state = str(row[state_column]).strip()
                 state_id = original_state.replace(".", "_") or "Unknown"
                 states_touched.add(state_id)
+
+                # Add an explicit sortable index so we can keep "latest 200" reliably
+                row_to_write = dict(row)
+                row_to_write["csv_index"] = i
+
                 doc_ref = (db.collection(COLLECTION_NAME)
                            .document(state_id)
                            .collection("data")
                            .document(str(i)))
-                batch.set(doc_ref, row)
-            batch.commit()
+                batch.set(doc_ref, row_to_write)
+
+            _firestore_commit_with_retry(
+                batch,
+                max_retries=int(os.getenv("FIRESTORE_COMMIT_MAX_RETRIES", "6")),
+                base_delay_s=float(os.getenv("FIRESTORE_COMMIT_BASE_DELAY_S", "1.0")),
+                max_delay_s=float(os.getenv("FIRESTORE_COMMIT_MAX_DELAY_S", "30.0")),
+            )
             total_uploaded += (batch_end - batch_start)
 
         # MongoDB: same new rows (if connected)
@@ -245,7 +284,8 @@ def sync_new_data():
         })
 
         # Enforce 200-per-state in Firebase after inserts
-        enforce_firestore_state_limit(states_touched, FIREBASE_STATE_LIMIT)
+        if os.getenv("FIRESTORE_HARD_TRIM", "0") == "1":
+            enforce_firestore_state_limit(states_touched, FIREBASE_STATE_LIMIT)
 
         print(f"✅ Firebase: {total_uploaded} new rows; trimmed to 200/state.")
         return {"message": f"✅ Firebase: {total_uploaded} new rows; trimmed to 200/state."}
@@ -268,6 +308,12 @@ class CSVHandler(FileSystemEventHandler):
 
 
 # ---------- Lifespan Context Manager (Modern FastAPI) ----------
+async def _run_initial_sync_safely():
+    try:
+        await asyncio.to_thread(sync_new_data)
+    except Exception as e:
+        print(f"⚠️ Initial sync failed; continuing without it. Error: {type(e).__name__}: {e}")
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
@@ -279,7 +325,11 @@ async def lifespan(app: FastAPI):
         print(f"⚡ Existing data detected (last_index={last_index}). Skipping initial sync.")
     else:
         print("🚀 No existing data. Running initial sync...")
-        sync_new_data()
+        if os.getenv("RUN_INITIAL_SYNC", "1") == "1":
+            if os.getenv("INITIAL_SYNC_BACKGROUND", "1") == "1":
+                asyncio.create_task(_run_initial_sync_safely())
+            else:
+                await _run_initial_sync_safely()
 
     event_handler = CSVHandler()
     observer = Observer()
