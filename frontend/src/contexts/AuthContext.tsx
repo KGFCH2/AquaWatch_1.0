@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -60,6 +60,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<UserData | AdminData | null>(null);
   const [loading, setLoading] = useState(true);
+  // Track if we have a non-Firebase session (admin or demo user)
+  const isNonFirebaseSession = useRef(false);
 
   const signup = async (email: string, password: string, state: string) => {
     try {
@@ -207,6 +209,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (
         ADMIN_CREDENTIALS[id as keyof typeof ADMIN_CREDENTIALS] === password
       ) {
+        setLoading(true);
+        
+        // Mark this as a non-Firebase session
+        isNonFirebaseSession.current = true;
+        
         // Create a mock admin user object
         const adminData: AdminData = {
           id,
@@ -221,11 +228,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           email: `${id}@aquawatch.admin`,
           emailVerified: true,
         } as User);
+        
+        console.log("Admin login successful");
+        
+        // Important: Set loading to false after admin login completes
+        setLoading(false);
       } else {
         throw new Error("Invalid admin credentials");
       }
     } catch (error) {
       console.error("Admin login error:", error);
+      setLoading(false);
       throw error;
     }
   };
@@ -234,6 +247,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       setLoading(true);
       console.log("Demo login started...");
+
+      // Mark this as a non-Firebase session
+      isNonFirebaseSession.current = true;
 
       // Create a demo user data
       const demoUserData: UserData = {
@@ -293,12 +309,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = async () => {
     try {
+      // Reset non-Firebase session flag
+      isNonFirebaseSession.current = false;
+      
       if (userData?.role === "admin") {
         // Admin logout - just clear state
         setCurrentUser(null);
         setUserData(null);
+      } else if (userData && "uid" in userData && userData.uid === "demo_user_123") {
+        // Demo user logout - just clear state
+        setCurrentUser(null);
+        setUserData(null);
       } else {
-        // User logout - Firebase signOut
+        // Regular user logout - Firebase signOut
         await signOut(auth);
       }
     } catch (error) {
@@ -309,37 +332,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      // Skip Firebase auth state changes for demo users and admins
-      if (
-        userData?.role === "admin" ||
-        (userData && "uid" in userData && userData.uid === "demo_user_123")
-      ) {
-        console.log("Skipping Firebase auth for demo/admin user");
+      console.log("onAuthStateChanged triggered, user:", user?.uid, "isNonFirebaseSession:", isNonFirebaseSession.current);
+      
+      // Skip if we have a non-Firebase session (admin or demo user)
+      if (isNonFirebaseSession.current) {
+        console.log("Skipping auth state change for non-Firebase session");
+        setLoading(false);
         return;
       }
-
+      
       if (user) {
         setCurrentUser(user);
 
         // Get user data from Firestore
-        const userDocRef = doc(db, "users", user.uid);
-        const userDocSnap = await getDoc(userDocRef);
+        try {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDocSnap = await getDoc(userDocRef);
 
-        if (userDocSnap.exists()) {
-          setUserData(userDocSnap.data() as UserData);
+          if (userDocSnap.exists()) {
+            setUserData(userDocSnap.data() as UserData);
+            console.log("User data loaded from Firestore");
+          } else {
+            console.log("No user document found in Firestore");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
         }
       } else {
-        // Only clear data if it's not a demo user
-        if (!userData || userData.uid !== "demo_user_123") {
-          setCurrentUser(null);
-          setUserData(null);
-        }
+        // Clear data when user signs out
+        setCurrentUser(null);
+        setUserData(null);
+        console.log("User signed out, cleared data");
       }
       setLoading(false);
     });
 
     return unsubscribe;
-  }, []); // Remove dependency on userData.role to prevent loops
+  }, []);
 
   const value: AuthContextType = {
     currentUser,

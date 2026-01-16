@@ -1,5 +1,6 @@
 data/
 .env
+predictions/
 
 # Main 
 auawatch-firebase-adminsdk-fbsvc-7af81c7aea.json
