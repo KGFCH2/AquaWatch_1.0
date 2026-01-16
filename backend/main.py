@@ -261,9 +261,18 @@ def sync_new_data():
                 # Prepare bulk operations: push arrays per state with upsert
                 ops = []
                 for state_id, docs in state_buffer.items():
+                    MAX_PER_STATE = int(os.getenv("MONGO_STATE_LIMIT", "50000"))
+
                     ops.append(UpdateOne(
                         {"_id": state_id},
-                        {"$push": {"data": {"$each": docs}}},
+                        {
+                            "$push": {
+                                "data": {
+                                    "$each": docs,
+                                    "$slice": -MAX_PER_STATE
+                                }
+                            }
+                        },
                         upsert=True
                     ))
 
